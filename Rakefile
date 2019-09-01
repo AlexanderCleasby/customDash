@@ -3,6 +3,8 @@
 
 require_relative 'config/application'
 require 'fileutils'
+require 'dotenv'
+
 
 namespace :start do
     task :development do

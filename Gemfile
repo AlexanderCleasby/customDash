@@ -42,3 +42,9 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'dotenv-rails'
+
+gem 'faraday', '~> 0.11'
+
+gem 'jwt', '~> 1.5'
+
+gem 'pry'
