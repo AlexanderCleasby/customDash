@@ -18,14 +18,18 @@ class App extends Component {
     fetch(`/user/?token=${window.localStorage.dashToken}`)
     .then(res=>res.json())
     .then(res=>this.props.changeUser(res))
+    .catch(err=>{
+      console.log(err)
+      this.props.changeUser({})
+    })
   }
 
   render(){
     debugger
-    if(!localStorage.dashToken){
+    if(this.props.user==={}){
       return (
         <div className="App">
-          {!localStorage.dashToken ? <Login /> : ""  }
+          {<Login /> }
         </div>
       )}
       else{
