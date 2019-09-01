@@ -1,3 +1,4 @@
+require 'pry'
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
 
@@ -10,6 +11,9 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
+    
+    #binding.pry
+    
     render json: @user
   end
 
@@ -41,7 +45,8 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      #binding.pry
+      @user = current_user
     end
 
     # Only allow a trusted parameter "white list" through.
