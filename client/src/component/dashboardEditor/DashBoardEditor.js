@@ -52,7 +52,7 @@ export default class DashBoardEditor extends Component {
             <label>Name:</label>
             <input name="name" onChange={this.valchange} value={this.state.name} />
           </div>
-        <div className = "App container " >
+        <div className = "DashBoardEditor" >
           
           <Matrix dropWidget={this.dropWidget}  pickedUpWidget={this.state.pickedUpWidget} handleDragOver={this.handleMatrixDragOver} placedWidgets={this.state.placedWidgets} width={5} height={4} / >
           <div className='sidebar'>
