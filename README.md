@@ -1,24 +1,7 @@
-# README
+# CustomDash
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+CustomDash is my last project for the Flatiron Software Engineering Bootcamp.  The concept is to provide a user interface for users to build out custom dashboards of public information branding/stock prices/news for waiting rooms, lobbies, other public places.
 
-Things you may want to cover:
+## Stack
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+The project employs a React/Redux front end and a Ruby on Rails API.  Authentication is handled using jason web tokens derived from access tokens from an OAUTH provider.
