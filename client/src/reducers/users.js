@@ -1,8 +1,8 @@
 export default (state = {},action)=>{
-    debugger
+    
     switch (action.type){
         case "CHANGE_USER":
-            return action.user
+            return {name:action.user.name}
         default:
             return state
 

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { getQueryParams } from "./utility/urlUtility"
 import './App.css';
 import Login from'./component/login'
+import Home from './component/home'
+import { Route } from "react-router-dom";
 import {connect} from 'react-redux'
 import changeUser from "./actions/useractions";
 class App extends Component {
@@ -21,6 +23,7 @@ class App extends Component {
     .catch(err=>{
       console.log(err)
       this.props.changeUser({})
+      localStorage.clear()
     })
   }
 
@@ -33,7 +36,11 @@ class App extends Component {
         </div>
       )}
       else{
-        return `you are logged in ${this.props.user.name}`
+        return(
+        <div className="App">
+          <Route path="/" exact component={Home}  />
+        {`you are logged in ${this.props.user.name}`}
+        </div>)
       }
     }
 }
