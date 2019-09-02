@@ -9,7 +9,7 @@
     flex-direction: column;
 }
 
-.row {
+.EditorRow {
     width: 100%;
     display: flex;
     align-items: center;
@@ -17,7 +17,7 @@
     flex-direction: row;
 }
 
-.cell{
+.EditorCell{
     background-color: rgb(192, 192, 192);
     height: 100%;
     border: 2px solid black;

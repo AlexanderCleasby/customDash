@@ -41,7 +41,7 @@ export default class Matrix extends Component {
     return (
       <div className="matrix">
         {Array.from(new Array(this.props.height), (x, i) => (
-          <div key={i} className="row" style={this.rowStyle}>
+          <div key={i} className="EditorRow" style={this.rowStyle}>
             {Array.from(new Array(this.props.width), (x, j) => (
               <Cell
                 handleDragOver={this.props.handleDragOver}
