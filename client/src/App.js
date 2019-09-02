@@ -28,7 +28,7 @@ class App extends Component {
   }
 
   render(){
-    debugger
+    
     if(!this.props.user.name){
       return (
         <div className="App">
