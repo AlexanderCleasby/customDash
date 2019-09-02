@@ -3,6 +3,7 @@ import { getQueryParams } from "./utility/urlUtility"
 import './App.css';
 import Login from'./component/login'
 import Home from './component/home'
+import DashBoardEditor from './component/dashboardEditor/DashBoardEditor'
 import { Route } from "react-router-dom";
 import {connect} from 'react-redux'
 import changeUser from "./actions/useractions";
@@ -39,6 +40,7 @@ class App extends Component {
         return(
         <div className="App">
           <Route path="/" exact component={Home}  />
+          <Route path="/new" exact component={DashBoardEditor} />
         {`you are logged in ${this.props.user.name}`}
         </div>)
       }
