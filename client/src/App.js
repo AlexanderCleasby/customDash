@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { getQueryParams } from "./utility/urlUtility"
-import './App.css';
+import './App.scss';
 import Login from'./component/login'
 import Home from './component/home'
+import NavBar from './component/navbar'
 import DashBoardEditor from './component/dashboardEditor/DashBoardEditor'
 import { Route } from "react-router-dom";
 import {connect} from 'react-redux'
@@ -41,6 +42,7 @@ class App extends Component {
       else{
         return(
         <div className="App">
+          <NavBar />
           <Route path="/" exact component={Home}  />
           <Route path="/new" exact component={DashBoardEditor} />
         {`you are logged in ${this.props.user.name}`}
