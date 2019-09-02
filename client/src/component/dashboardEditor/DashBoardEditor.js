@@ -1,7 +1,7 @@
 import React, {
-  Component
+  Component, Fragment
 } from 'react';
-//import Widget from './widgets/widget'
+import './dashboardEditor.scss'
 import TickerWidget from './widgets/ticker'
 import MapWidget from './widgets/map'
 import Matrix from './matrix/matrix'
@@ -12,6 +12,7 @@ export default class DashBoardEditor extends Component {
   constructor(){
     super()
     this.state={
+      name:'',
       placedWidgets:[],
       pickedUpWidget:{state:{x:null,y:null,width:2,height:1}}
     }
@@ -42,17 +43,26 @@ export default class DashBoardEditor extends Component {
     this.setState({pickedUpWidget:{state:{...this.state.pickedUpWidget,x:null,y:null}}})
   }
 
+  valchange = (e)=>this.setState({[e.target.name]:e.target.value})
+
   render() {
     return ( 
-      
+        <Fragment>
+          <div className="nameHeader">
+            <label>Name:</label>
+            <input name="name" onChange={this.valchange} value={this.state.name} />
+          </div>
         <div className = "App container " >
+          
           <Matrix dropWidget={this.dropWidget}  pickedUpWidget={this.state.pickedUpWidget} handleDragOver={this.handleMatrixDragOver} placedWidgets={this.state.placedWidgets} width={5} height={4} / >
           <div className='sidebar'>
             <TickerWidget id={1} color={"#FFCC22"} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} name = 'wooh' / >
             <TickerWidget id={2} color={"#FFACAA"} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} name = 'wooh' / >
             <MapWidget id={3} color={"#99cc22"} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} name = 'wooh' / >
           </div>
+          
         </div>
+        </Fragment>
       
     )
   };
