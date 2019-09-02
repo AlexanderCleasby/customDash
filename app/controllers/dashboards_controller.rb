@@ -4,7 +4,7 @@ class DashboardsController < ApplicationController
 
   # GET /dashboards
   def index
-    @dashboards = Dashboard.all
+    @dashboards = current_user.dashboards
 
     render json: @dashboards
   end
