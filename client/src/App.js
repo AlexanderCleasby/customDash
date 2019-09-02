@@ -18,14 +18,16 @@ class App extends Component {
   }
 
   componentDidMount(){
-    fetch(`/user/?token=${window.localStorage.dashToken}`)
-    .then(res=>res.json())
-    .then(res=>this.props.changeUser(res))
-    .catch(err=>{
-      console.log(err)
-      this.props.changeUser({})
-      localStorage.clear()
-    })
+    if (!this.props.user.name){
+      fetch(`/user/?token=${window.localStorage.dashToken}`)
+      .then(res=>res.json())
+      .then(res=>this.props.changeUser(res))
+      .catch(err=>{
+        console.log(err)
+        this.props.changeUser({})
+        localStorage.clear()
+      })
+    }
   }
 
   render(){
