@@ -40,8 +40,8 @@ export default class Widget extends Component {
           </div>
           {this.renderBody()}
           <div>
-            <input name="width" type="number" />
-            <input name="height" type="number" />
+            <input name="width" type="number" onChange={this.valChange} value={this.state.width} className="sizeInput" />
+            <input name="height" type="number" onChange={this.valChange} value={this.state.height} className="sizeInput"  />
           </div>
         </div>
       );
