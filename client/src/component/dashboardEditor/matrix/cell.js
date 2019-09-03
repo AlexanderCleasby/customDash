@@ -2,26 +2,18 @@ import React, {Component} from 'react';
 
 
 
-export default class Cell extends Component{
-    constructor(props){
-        super()
-        
-    }
-    
-
-    render(){
+export default (props)=>{
         return (
             
             <div
-              style={this.props.highlighted ? {...this.props.style,backgroundColor:this.props.highlighted} : this.props.style}
+              style={props.highlighted ? {...props.style,backgroundColor:props.highlighted} : props.style}
               className="EditorCell"
-              onDrop={this.props.dropWidget}
+              onDrop={props.dropWidget}
               onDragOver={(e)=>{e.preventDefault()}}
               onDragEnter={(e)=>{
-                this.props.handleDragOver(e,this.props.coords)
+                props.handleDragOver(e,props.coords)
               }}
               
             />
           );
     }
-}
