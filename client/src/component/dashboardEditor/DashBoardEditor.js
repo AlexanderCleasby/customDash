@@ -9,12 +9,14 @@ import Matrix from './matrix/matrix'
 
 
 export default class DashBoardEditor extends Component {
-  constructor(){
+  constructor(props){
     super()
     this.state={
       name:'',
       placedWidgets:[],
-      pickedUpWidget:{state:{x:null,y:null,width:2,height:1}}
+      pickedUpWidget:{state:{x:null,y:null,width:2,height:1}},
+      width:props.width||5,
+      height:props.height||5
     }
   }
 
@@ -44,6 +46,7 @@ export default class DashBoardEditor extends Component {
   }
 
   valchange = (e)=>this.setState({[e.target.name]:e.target.value})
+  valchangeInt = (e)=>this.setState({[e.target.name]:parseInt(e.target.value)})
 
   render() {
     return ( 
@@ -54,13 +57,14 @@ export default class DashBoardEditor extends Component {
           </div>
         <div className = "DashBoardEditor" >
           
-          <Matrix dropWidget={this.dropWidget}  pickedUpWidget={this.state.pickedUpWidget} handleDragOver={this.handleMatrixDragOver} placedWidgets={this.state.placedWidgets} width={5} height={4} / >
+          <Matrix dropWidget={this.dropWidget}  pickedUpWidget={this.state.pickedUpWidget} handleDragOver={this.handleMatrixDragOver} placedWidgets={this.state.placedWidgets} width={this.state.width} height={this.state.height} / >
           <div className='sidebar'>
             <TickerWidget id={1} color={"#FFCC22"} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} name = 'wooh' / >
             <TickerWidget id={2} color={"#FFACAA"} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} name = 'wooh' / >
             <MapWidget id={3} color={"#99cc22"} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} name = 'wooh' / >
           </div>
-          
+          <label>Width: </label><input name="width" type="number" onChange={this.valchangeInt} value={this.state.width} />
+          <label>Height: </label><input name="height" type="number" onChange={this.valchangeInt} value={this.state.height} />
         </div>
         </Fragment>
       
