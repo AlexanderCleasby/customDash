@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_07_145120) do
+ActiveRecord::Schema.define(version: 2019_09_07_202256) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,10 @@ ActiveRecord::Schema.define(version: 2019_09_07_145120) do
     t.string "widget_type"
     t.json "ops"
     t.bigint "dashboard_id", null: false
+    t.integer "x"
+    t.integer "y"
+    t.integer "width"
+    t.integer "height"
     t.index ["dashboard_id"], name: "index_widgets_on_dashboard_id"
   end
 
