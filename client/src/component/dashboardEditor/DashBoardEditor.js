@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 import './dashboardEditor.scss'
 import {Button} from 'reactstrap'
+import randomColor from 'randomcolor'
 import TickerWidget from './widgets/ticker'
 import MapWidget from './widgets/map'
 import Matrix from './matrix/matrix'
@@ -15,13 +16,15 @@ export default class DashBoardEditor extends Component {
     this.state={
       name:'',
       placedWidgets:[],
-      stagedWidgets:[<TickerWidget id={3} color={"#99cc22"} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd}  />],
+      stagedWidgets:[],
       pickedUpWidget:{state:{x:null,y:null,width:0,height:0}},
       width:props.width||5,
       height:props.height||5,
       newWidgetType:this.widgetTypes[0]
     }
   }
+
+  randomColor=()=>randomColor({luminosity: 'light'})
 
   pushToCloud = ()=>{
     fetch(`/dashboards/?token=${localStorage.dashToken}`,{
@@ -67,7 +70,7 @@ export default class DashBoardEditor extends Component {
   }
 
   dropWidget=(e,v)=>{
-    if (!this.state.placedWidgets.find((widget)=>this.state.pickedUpWidget.props.id===widget.props.id)){
+    if (![...this.state.placedWidgets,...this.state.stagedWidgets].find((widget)=>this.state.pickedUpWidget.props.id===widget.props.id)){
       this.setState({placedWidgets:[...this.state.placedWidgets,this.state.pickedUpWidget]})
     }
   }
