@@ -22,8 +22,6 @@ export default class DashBoardEditor extends Component {
   }
 
   pushToCloud = ()=>{
-    debugger
-    let data = {width:this.state.width,height:this.state.height}
     fetch(`/dashboards/?token=${localStorage.dashToken}`,{
       headers: {
         "Content-Type": "application/json"
