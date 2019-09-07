@@ -84,9 +84,9 @@ export default class DashBoardEditor extends Component {
           
           <Matrix dropWidget={this.dropWidget}  pickedUpWidget={this.state.pickedUpWidget} handleDragOver={this.handleMatrixDragOver} placedWidgets={this.state.placedWidgets} width={this.state.width} height={this.state.height} / >
           <div className='sidebar'>
-            <TickerWidget id={1} color={"#FFCC22"} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} name = 'wooh' / >
-            <TickerWidget id={2} color={"#FFACAA"} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} name = 'wooh' / >
-            <MapWidget id={3} color={"#99cc22"} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} name = 'wooh' / >
+            <TickerWidget id={1} color={"#FFCC22"} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd}  / >
+            <TickerWidget id={2} color={"#FFACAA"} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd}  / >
+            <MapWidget id={3} color={"#99cc22"} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd}  / >
           </div>
           <label>Width: </label><input name="width" type="number" onChange={this.valchangeInt} value={this.state.width} />
           <label>Height: </label><input name="height" type="number" onChange={this.valchangeInt} value={this.state.height} />
