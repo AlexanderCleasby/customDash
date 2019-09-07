@@ -15,10 +15,11 @@ export default class Widget extends Component {
     };
   }
 
-  valChange=(e)=>{
+  valChangeInt=(e)=>{
     this.setState({[e.target.name]:parseInt(e.target.value)})
   }
 
+  valChange=(e)=>this.setState({[e.target.name]:e.target.value})
 
   render() {
     //React throws out the drag
@@ -40,8 +41,8 @@ export default class Widget extends Component {
           </div>
           {this.renderBody()}
           <div>
-            <input name="width" type="number" onChange={this.valChange} value={this.state.width} className="sizeInput" />
-            <input name="height" type="number" onChange={this.valChange} value={this.state.height} className="sizeInput"  />
+            <input name="width" type="number" onChange={this.valChangeInt} value={this.state.width} className="sizeInput" />
+            <input name="height" type="number" onChange={this.valChangeInt} value={this.state.height} className="sizeInput"  />
           </div>
         </div>
       );

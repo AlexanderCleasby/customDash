@@ -5,12 +5,17 @@ import { faChartLine } from '@fortawesome/free-solid-svg-icons'
 export default class TickerWidget extends widget{
     constructor(){
         super()
-        this.state={...this.state,tickers:[]}
+        this.state={...this.state,tickers:[],TickerInput:''}
     }
     icon=faChartLine
 
-    AddTicker=()=>{
-        this.setState({tickers:[...this.state.tickers,]})
+    AddTicker=(e)=>{
+        e.preventDefault()
+        this.setState({tickers:[...this.state.tickers,this.state.TickerInput]})
+    }
+    type="ticker"
+    ops=()=>{
+        return {tickers:this.state.tickers}
     }
     
     renderBody(){
@@ -18,8 +23,8 @@ export default class TickerWidget extends widget{
                 <label>Tickers:</label>
                 <br></br>
                 {this.state.tickers.map(ticker => <div>{ticker}</div>)}
-                <form>
-                    <input />
+                <form onSubmit={this.AddTicker}>
+                    <input name="TickerInput" value={this.state.TickerInput} onChange={this.valChange} />
                     <input type='submit' />
                 </form>
             </div>

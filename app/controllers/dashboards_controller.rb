@@ -21,11 +21,9 @@ class DashboardsController < ApplicationController
     @dashboard = Dashboard.new(dashboard_params)
     @dashboard.user = current_user
 
-    
-    #binding.pry
-
     params[:widgets].each do |widget| 
-      @widget = Widget.new({widget_type:widget[:type],ops:widget[:ops]})
+      widget.permit!
+      @widget = Widget.new(widget)
       @widget.dashboard=@dashboard
       if !@widget.save
         render json: @widget.errors, status: :unprocessable_entity

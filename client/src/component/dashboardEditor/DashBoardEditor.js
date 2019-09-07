@@ -2,6 +2,7 @@ import React, {
   Component, Fragment
 } from 'react';
 import './dashboardEditor.scss'
+import {Button} from 'reactstrap'
 import TickerWidget from './widgets/ticker'
 import MapWidget from './widgets/map'
 import Matrix from './matrix/matrix'
@@ -18,6 +19,32 @@ export default class DashBoardEditor extends Component {
       width:props.width||5,
       height:props.height||5
     }
+  }
+
+  pushToCloud = ()=>{
+    debugger
+    let data = {width:this.state.width,height:this.state.height}
+    fetch(`/dashboards/?token=${localStorage.dashToken}`,{
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method:"POST",
+      body: JSON.stringify({
+            dashboard: {
+              name: this.state.name,
+              width: this.state.width,
+              height: this.state.height,
+            },
+            widgets:this.state.placedWidgets.map((widget)=>({
+              widget_type:widget.type,
+              ops:widget.ops(),
+              x:widget.state.x,
+              y:widget.state.y,
+              width:widget.state.width,
+              height:widget.state.height
+            }))
+      })
+    })
   }
 
   dropWidget=(e,v)=>{
@@ -65,6 +92,7 @@ export default class DashBoardEditor extends Component {
           </div>
           <label>Width: </label><input name="width" type="number" onChange={this.valchangeInt} value={this.state.width} />
           <label>Height: </label><input name="height" type="number" onChange={this.valchangeInt} value={this.state.height} />
+          <Button onClick={this.pushToCloud}>Submit</Button>
         </div>
         </Fragment>
       
