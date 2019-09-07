@@ -15,9 +15,11 @@ export default class DashBoardEditor extends Component {
     this.state={
       name:'',
       placedWidgets:[],
-      pickedUpWidget:{state:{x:null,y:null,width:2,height:1}},
+      stagedWidgets:[<TickerWidget id={3} color={"#99cc22"} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd}  />],
+      pickedUpWidget:{state:{x:null,y:null,width:0,height:0}},
       width:props.width||5,
-      height:props.height||5
+      height:props.height||5,
+      newWidgetType:this.widgetTypes[0]
     }
   }
 
@@ -45,6 +47,22 @@ export default class DashBoardEditor extends Component {
     })
   }
 
+  widgetTypes=["Map","Ticker"]
+
+  createNewWidget=()=>{
+    let newWidget
+    switch (this.state.newWidgetType) {
+      case "Map":
+        newWidget=<MapWidget color={"#99cc22"} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} />
+        break;
+      default:
+        return false
+        break;
+    }
+    console.log(newWidget)
+    this.setState({"stagedWidgets":[...this.state.stagedWidgets,newWidget]})
+  }
+
   dropWidget=(e,v)=>{
     if (!this.state.placedWidgets.find((widget)=>this.state.pickedUpWidget.props.id===widget.props.id)){
       this.setState({placedWidgets:[...this.state.placedWidgets,this.state.pickedUpWidget]})
@@ -62,6 +80,7 @@ export default class DashBoardEditor extends Component {
   }
 
   handleDragStart = (e,widget) => {
+    console.log(this)
     this.setState({pickedUpWidget:widget})
   };
 
@@ -81,12 +100,17 @@ export default class DashBoardEditor extends Component {
             <input name="name" onChange={this.valchange} value={this.state.name} />
           </div>
         <div className = "DashBoardEditor" >
-          
+        
           <Matrix dropWidget={this.dropWidget}  pickedUpWidget={this.state.pickedUpWidget} handleDragOver={this.handleMatrixDragOver} placedWidgets={this.state.placedWidgets} width={this.state.width} height={this.state.height} / >
           <div className='sidebar'>
-            <TickerWidget id={1} color={"#FFCC22"} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd}  / >
-            <TickerWidget id={2} color={"#FFACAA"} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd}  / >
-            <MapWidget id={3} color={"#99cc22"} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd}  / >
+            {this.state.stagedWidgets}
+            <div className='footer'>
+              <a>New Widget:</a>
+              <select name="newWidgetType" onChange={this.valchange}>
+                {this.widgetTypes.map((type)=><option>{type}</option>)}
+              </select>
+              <Button onClick={this.createNewWidget}>Create</Button>
+            </div>
           </div>
           <label>Width: </label><input name="width" type="number" onChange={this.valchangeInt} value={this.state.width} />
           <label>Height: </label><input name="height" type="number" onChange={this.valchangeInt} value={this.state.height} />
