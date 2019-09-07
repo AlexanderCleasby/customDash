@@ -53,10 +53,10 @@ export default class DashBoardEditor extends Component {
     let newWidget
     switch (this.state.newWidgetType) {
       case "Map":
-        newWidget=<MapWidget color={"#99cc22"} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} />
+        newWidget=<MapWidget color={randomColor()} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} />
         break;
       case "Ticker":
-        newWidget=<TickerWidget color={"#99cc22"} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} />
+        newWidget=<TickerWidget color={randomColor()} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} />
         break
       default:
         return false
