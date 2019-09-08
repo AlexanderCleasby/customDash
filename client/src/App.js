@@ -4,6 +4,7 @@ import './App.scss';
 import Login from'./component/login'
 import Home from './component/home'
 import NavBar from './component/navbar'
+import Display from './component/display'
 import DashBoardEditor from './component/dashboardEditor/DashBoardEditor'
 import { Route } from "react-router-dom";
 import {connect} from 'react-redux'
@@ -45,6 +46,7 @@ class App extends Component {
           <NavBar />
           <Route path="/" exact component={Home}  />
           <Route path="/new" exact component={DashBoardEditor} />
+          <Route path="/display/:id" component={Display} /> 
         {`you are logged in ${this.props.user.name}`}
         </div>)
       }
