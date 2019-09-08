@@ -113,7 +113,7 @@ export default class DashBoardEditor extends Component {
             <div className='footer'>
               <a>New Widget:</a>
               <select name="newWidgetType" onChange={this.valchange}>
-                {this.widgetTypes.map((type)=><option>{type}</option>)}
+                {this.widgetTypes.map((type,i)=><option key={i}>{type}</option>)}
               </select>
               <Button onClick={this.createNewWidget}>Create</Button>
             </div>

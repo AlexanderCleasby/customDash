@@ -44,6 +44,7 @@ export default class Matrix extends Component {
           <div key={i} className="EditorRow" style={this.rowStyle}>
             {Array.from(new Array(this.props.width), (x, j) => (
               <Cell
+                key={i*this.props.height+j}
                 handleDragOver={this.props.handleDragOver}
                 dropWidget={this.props.dropWidget}
                 coords={{ x: i, y: j }}
