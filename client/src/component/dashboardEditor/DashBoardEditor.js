@@ -57,16 +57,21 @@ export default class DashBoardEditor extends Component {
     let newWidget
     switch (this.state.newWidgetType) {
       case "Map":
-        newWidget=<MapWidget id={uuid()} color={randomColor()} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} />
+        newWidget=<MapWidget id={uuid()} color={randomColor()} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} deleteWidget={this.deleteWidget} />
         break;
       case "Ticker":
-        newWidget=<TickerWidget id={uuid()} color={randomColor()} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} />
+        newWidget=<TickerWidget id={uuid()} color={randomColor()} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} deleteWidget={this.deleteWidget} />
         break
       default:
         return false
     }
     console.log(newWidget)
     this.setState({"stagedWidgets":[...this.state.stagedWidgets,newWidget]})
+  }
+
+  deleteWidget=(id)=>{
+    this.setState({stagedWidgets:this.state.stagedWidgets.filter((widget)=>widget.props.id!==id)})
+    this.setState({placedWidgets:this.state.placedWidgets.filter((widget)=>widget.props.id!==id)})
   }
 
   dropWidget=(e,v)=>{

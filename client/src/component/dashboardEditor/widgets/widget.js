@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
 import "./widget.scss";
 
@@ -37,6 +38,11 @@ export default class Widget extends Component {
             <FontAwesomeIcon
               icon={this.icon}
             />
+            </div>
+            <div className="logo trash" onClick={()=>this.props.deleteWidget(this.props.id)}>
+              <FontAwesomeIcon
+                icon={faTrashAlt}
+              />
             </div>
           </div>
           {this.renderBody()}
