@@ -4,6 +4,7 @@ import React, {
 import './dashboardEditor.scss'
 import {Button} from 'reactstrap'
 import randomColor from 'randomcolor'
+import uuid from 'uuid'
 import TickerWidget from './widgets/ticker'
 import MapWidget from './widgets/map'
 import Matrix from './matrix/matrix'
@@ -56,10 +57,10 @@ export default class DashBoardEditor extends Component {
     let newWidget
     switch (this.state.newWidgetType) {
       case "Map":
-        newWidget=<MapWidget color={randomColor()} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} />
+        newWidget=<MapWidget id={uuid()} color={randomColor()} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} />
         break;
       case "Ticker":
-        newWidget=<TickerWidget color={randomColor()} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} />
+        newWidget=<TickerWidget id={uuid()} color={randomColor()} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} />
         break
       default:
         return false
@@ -70,7 +71,7 @@ export default class DashBoardEditor extends Component {
   }
 
   dropWidget=(e,v)=>{
-    if (![...this.state.placedWidgets,...this.state.stagedWidgets].find((widget)=>this.state.pickedUpWidget.props.id===widget.props.id)){
+    if (!this.state.placedWidgets.find((widget)=>this.state.pickedUpWidget.props.id===widget.props.id)){
       this.setState({placedWidgets:[...this.state.placedWidgets,this.state.pickedUpWidget]})
     }
   }
