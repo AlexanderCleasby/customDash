@@ -18,6 +18,12 @@ export default class MapWidget extends widget{
         return {coords:{lon:this.state.lon,lat:this.state.lat},zoomLevel:1}
     }
     renderBody(){
-        return <div>map Specfic body goes here</div>
+        return (
+        <div>
+            <label>Lon:</label>
+            <input name="lon" type="number" onChange={this.valChange}  />
+            <label>Lat:</label>
+            <input name="lat" type="number" onChange={this.valChange}  />
+        </div>)
     }
 }
