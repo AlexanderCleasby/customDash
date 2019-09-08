@@ -64,7 +64,6 @@ export default class DashBoardEditor extends Component {
         break
       default:
         return false
-        break;
     }
     console.log(newWidget)
     this.setState({"stagedWidgets":[...this.state.stagedWidgets,newWidget]})
