@@ -48,7 +48,8 @@ export default class DashBoardEditor extends Component {
               height:widget.state.height
             }))
       })
-    })
+    }).then(res=>res.json())
+    .then(res=>window.location.href = `/display/${res.id}`)
   }
 
   widgetTypes=["Map","Ticker"]
