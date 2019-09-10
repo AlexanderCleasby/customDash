@@ -18,8 +18,8 @@ export default  class MapWidgetDisplay extends Component  {
 
     widgetStyles = ()=>({
             position:'absolute',
-            top:DecimalToPercent(this.props.x/this.props.dashHeight),
-            left:DecimalToPercent(this.props.y/this.props.dashWidth),
+            top:DecimalToPercent(this.props.y/this.props.dashWidth),
+            left:DecimalToPercent(this.props.x/this.props.dashHeight),
             height:DecimalToPercent(this.props.width/this.props.dashWidth),
             width:DecimalToPercent(this.props.height/this.props.dashHeight) 
             /* TODO: the way height and width are handled by the Dashboard editor is clearly mixed up, when that is fixed this method will nees to be fixed */ 
