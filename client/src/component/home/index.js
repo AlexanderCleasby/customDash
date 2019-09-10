@@ -17,6 +17,6 @@ export default class Home  extends Component{
 
 
     render(){
-        return <div><Dashboards dashboards={this.state.dashboards} /></div>
+        return <div className="Home"><Dashboards dashboards={this.state.dashboards} /></div>
     }
 }

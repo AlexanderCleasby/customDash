@@ -3,6 +3,6 @@ import {Button, ListGroup,ListGroupItem} from 'reactstrap'
 
 export default (props)=>{
     return <ListGroup>
-        {props.dashboards.map((dashboard,i)=><ListGroupItem key={i}>{dashboard.name}<Button color="success" href={`/display/${dashboard.id}`}>Display</Button></ListGroupItem>)}
+        {props.dashboards.map((dashboard,i)=><ListGroupItem key={i}>{dashboard.name}<Button style={{float:"right"}} color="success" href={`/display/${dashboard.id}`}>Display</Button></ListGroupItem>)}
         </ListGroup>
 }
