@@ -1,5 +1,5 @@
 class DashboardSerializer <  ActiveModel::Serializer
-    attributes :name
+    attributes :name, :width, :height
     has_many :widgets
 
 end

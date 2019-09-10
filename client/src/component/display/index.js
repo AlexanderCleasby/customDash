@@ -20,6 +20,8 @@ export default class Display extends Component{
         .then((res) => res.json())
         .then((res) => {
             console.log(res)
+            this.setState({dashHeight:res.height})
+            this.setState({dashWidth:res.width})
             this.setState({widgets:this.createWidgets(res.widgets)})
         })
     }
