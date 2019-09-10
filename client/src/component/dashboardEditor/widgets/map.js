@@ -7,7 +7,7 @@ export default class MapWidget extends widget{
     constructor(){
         super()
         this.state={
-            lon:null,
+            lng:null,
             lat:null,
             zoom:1
         }
@@ -15,15 +15,15 @@ export default class MapWidget extends widget{
     icon=faMap
     type="map"
     ops=()=>{
-        return {coords:{lon:this.state.lon,lat:this.state.lat},zoomLevel:1}
+        return {coords:{lng:this.state.lng,lat:this.state.lat},zoomLevel:1}
     }
     renderBody(){
         return (
         <div>
             <label>Lon:</label>
-            <input name="lon" type="number" onChange={this.valChange}  />
+            <input name="lng" type="number" onChange={this.valChangeFloat}  />
             <label>Lat:</label>
-            <input name="lat" type="number" onChange={this.valChange}  />
+            <input name="lat" type="number" onChange={this.valChangeFloat}  />
         </div>)
     }
 }

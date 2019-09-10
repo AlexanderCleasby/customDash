@@ -22,6 +22,8 @@ export default class Widget extends Component {
 
   valChange=(e)=>this.setState({[e.target.name]:e.target.value})
 
+  valChangeFloat=(e)=>this.setState({[e.target.name]:parseFloat(e.target.value)})
+
   render() {
     //React throws out the drag
       return (
