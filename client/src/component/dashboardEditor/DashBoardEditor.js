@@ -9,8 +9,6 @@ import TickerWidget from './widgets/ticker'
 import MapWidget from './widgets/map'
 import Matrix from './matrix/matrix'
 
-
-
 export default class DashBoardEditor extends Component {
   constructor(props){
     super()
