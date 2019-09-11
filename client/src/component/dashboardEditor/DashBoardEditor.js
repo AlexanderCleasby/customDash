@@ -8,6 +8,7 @@ import uuid from 'uuid'
 import TickerWidget from './widgets/ticker'
 import MapWidget from './widgets/map'
 import Matrix from './matrix/matrix'
+import Widget from './widgets/widget';
 
 export default class DashBoardEditor extends Component {
   constructor(props){
@@ -20,6 +21,11 @@ export default class DashBoardEditor extends Component {
       width:props.width||5,
       height:props.height||5,
       newWidgetType:this.widgetTypes[0]
+    }
+    if (props.match.params.id){
+      fetch(`/dashboards/${props.match.params.id}/?token=${window.localStorage.dashToken}`)
+      .then(res=>res.json())
+      .then(res=>this.importDashboard(res))
     }
   }
 
@@ -50,22 +56,35 @@ export default class DashBoardEditor extends Component {
     .then(res=>window.location.href = `/display/${res.id}`)
   }
 
+  importDashboard = (dashboard)=>{
+    console.log(dashboard)
+    this.setState((prevState)=>({...prevState,name:dashboard.name,width:dashboard.width,height:dashboard.height}))
+    dashboard.widgets.forEach((widget)=>this.createNewWidget(widget.widget_type,widget))
+    //this.setState({placedWidgets:this.createWidgets(dashboard.widgets)})
+  }
+
   widgetTypes=["Map","Ticker"]
 
-  createNewWidget=()=>{
+  createNewWidget=(type,widget)=>{
+    if(widget){delete widget.id}
+    debugger
     let newWidget
-    switch (this.state.newWidgetType) {
-      case "Map":
-        newWidget=<MapWidget id={uuid()} color={randomColor()} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} deleteWidget={this.deleteWidget} />
+    switch (type.toLowerCase()) {
+      case "map":
+      
+      newWidget=<MapWidget {...widget} id={uuid()} color={randomColor()} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} deleteWidget={this.deleteWidget} />
         break;
-      case "Ticker":
+      case "ticker":
         newWidget=<TickerWidget id={uuid()} color={randomColor()} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} deleteWidget={this.deleteWidget} />
         break
       default:
         return false
     }
-    console.log(newWidget)
-    this.setState({"stagedWidgets":[...this.state.stagedWidgets,newWidget]})
+    //console.log(newWidget)
+    this.setState({"stagedWidgets":[...this.state.stagedWidgets,newWidget]},()=>{
+      if (widget){this.setState({placedWidgets:[...this.state.stagedWidgets]})}
+    })
+      
   }
 
   deleteWidget=(id)=>{
@@ -90,7 +109,6 @@ export default class DashBoardEditor extends Component {
   }
 
   handleDragStart = (e,widget) => {
-    console.log(this)
     this.setState({pickedUpWidget:widget})
   };
 
@@ -103,6 +121,7 @@ export default class DashBoardEditor extends Component {
   valchangeInt = (e)=>this.setState({[e.target.name]:parseInt(e.target.value)})
 
   render() {
+    console.log(this.state.stagedWidgets[0])
     return ( 
         <Fragment>
           <div className="nameHeader">
@@ -111,7 +130,7 @@ export default class DashBoardEditor extends Component {
           </div>
         <div className = "DashBoardEditor" >
         
-          <Matrix dropWidget={this.dropWidget}  pickedUpWidget={this.state.pickedUpWidget} handleDragOver={this.handleMatrixDragOver} placedWidgets={this.state.placedWidgets} width={this.state.width} height={this.state.height} / >
+          <Matrix dropWidget={this.dropWidget}  pickedUpWidget={this.state.pickedUpWidget} handleDragOver={this.handleMatrixDragOver} placedWidgets={this.state.stagedWidgets} width={this.state.width} height={this.state.height} / >
           <div className='sidebar'>
             {this.state.stagedWidgets}
             <div className='footer'>
@@ -119,7 +138,7 @@ export default class DashBoardEditor extends Component {
               <select name="newWidgetType" onChange={this.valchange}>
                 {this.widgetTypes.map((type,i)=><option key={i}>{type}</option>)}
               </select>
-              <Button onClick={this.createNewWidget}>Create</Button>
+              <Button onClick={()=>this.createNewWidget(this.state.newWidgetType)}>Create</Button>
             </div>
           </div>
           <label>Width: </label><input name="width" type="number" onChange={this.valchangeInt} value={this.state.width} />

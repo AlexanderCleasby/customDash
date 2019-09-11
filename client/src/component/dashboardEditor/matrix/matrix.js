@@ -26,14 +26,15 @@ export default class Matrix extends Component {
     }
     else{
       if (this.props.placedWidgets.length){
-      let matchedTracker =  this.props.placedWidgets.find((widget)=>{
-        return((x>=widget.state.x && x < widget.state.x+widget.state.width  && x < widget.state.x + widget.state.width)
-        &&
-        (y >= widget.state.y && y < widget.state.y + widget.state.height))
-      })
-    
+        let matchedTracker =  this.props.placedWidgets.find((widget)=>{
+          let dim=widget.state || widget.props
+          return((x>=dim.x && x < dim.x+dim.width  && x < dim.x + dim.width)
+          &&
+          (y >= dim.y && y < dim.y + dim.height))
+        })
       return (matchedTracker ? matchedTracker.props.color : null) 
-    }}
+    }
+  }
     
   };
 

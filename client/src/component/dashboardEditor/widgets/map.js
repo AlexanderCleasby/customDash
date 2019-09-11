@@ -4,13 +4,15 @@ import { faMap } from '@fortawesome/free-solid-svg-icons'
 
 
 export default class MapWidget extends widget{
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state={
+            ...this.state,
             lng:null,
             lat:null,
             zoom:1
         }
+        
     }
     icon=faMap
     type="map"

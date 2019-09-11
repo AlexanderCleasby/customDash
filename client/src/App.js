@@ -46,6 +46,7 @@ class App extends Component {
           <NavBar />
           <Route path="/" exact component={Home}  />
           <Route path="/new" exact component={DashBoardEditor} />
+          <Route path="/edit/:id" component={DashBoardEditor} />}
           <Route path="/display/:id" component={Display} /> 
         {`you are logged in ${this.props.user.name}`}
         </div>)

@@ -7,14 +7,18 @@ import "./widget.scss";
 
 export default class Widget extends Component {
   constructor(props) {
-    super();
+    super(props);
+    
     this.state = {
-        x:null,
-        y:null,
-        width:2,
-        height:1
-    };
+      x:this.props.x||null,
+      y:this.props.y||null,
+      width:this.props.width||2,
+      height:this.props.height||1
+  };
   }
+  
+
+  
 
   valChangeInt=(e)=>{
     this.setState({[e.target.name]:parseInt(e.target.value)})
