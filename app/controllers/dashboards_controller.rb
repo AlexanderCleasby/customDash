@@ -40,6 +40,19 @@ class DashboardsController < ApplicationController
   # PATCH/PUT /dashboards/1
   def update
     if @dashboard.update(dashboard_params)
+      params[:widgets].each do |widget|
+        widget.permit!
+        if !Widget.find_by({id:widget[:id]})
+          @widget = Widget.new(widget)
+          @widget.dashboard=@dashboard
+          @widget.save
+        else
+          @widget=Widget.find(widget[:id])
+          widget = widget.except("id")
+          @widget.update(widget)
+        end
+
+      end
       render json: @dashboard
     else
       render json: @dashboard.errors, status: :unprocessable_entity
