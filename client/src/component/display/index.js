@@ -1,4 +1,6 @@
-import React,{ Component } from 'react';
+import React,{ Component, Fragment } from 'react';
+import Fullscreen from "react-full-screen";
+import { Button } from 'reactstrap'
 import Ticker from './widgets/ticker'
 import Map from './widgets/map'
 import './display.scss'
@@ -9,7 +11,8 @@ export default class Display extends Component{
         this.state={
             widgets:[],
             dashHeight:5,
-            dashWidth:5
+            dashWidth:5,
+            isFull:false
         }
     }
 
@@ -42,9 +45,16 @@ export default class Display extends Component{
 
     render(){
         return (
-        <div className="display">
-            {this.state.widgets}
-        </div>
+            <Fragment>
+                <Fullscreen enabled={this.state.isFull}onChange={ isFull => this.setState({isFull})}>
+                    <div className="full-screenable-node display">
+                        {this.state.widgets}
+                    </div>
+                </Fullscreen>
+                    <Button onClick={()=>this.setState({isFull:true})} >
+                        Go Fullscreen
+                    </Button>
+        </Fragment>
         )
     }
 } 
