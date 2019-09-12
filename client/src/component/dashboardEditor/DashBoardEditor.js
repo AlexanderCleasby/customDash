@@ -57,7 +57,6 @@ export default class DashBoardEditor extends Component {
   }
 
   importDashboard = (dashboard)=>{
-    console.log(dashboard)
     this.setState((prevState)=>({...prevState,name:dashboard.name,width:dashboard.width,height:dashboard.height}))
     dashboard.widgets.forEach((widget)=>this.createNewWidget(widget.widget_type,widget))
     //this.setState({placedWidgets:this.createWidgets(dashboard.widgets)})
