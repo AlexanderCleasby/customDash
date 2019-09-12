@@ -3,8 +3,8 @@ import widget from './widget'
 import { faChartLine } from '@fortawesome/free-solid-svg-icons'
 
 export default class TickerWidget extends widget{
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state={...this.state,tickers:[],TickerInput:''}
     }
     icon=faChartLine
