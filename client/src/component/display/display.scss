@@ -3,6 +3,7 @@
     position: relative;
     width: 720px;
     height: 480px;
+    margin-bottom: 50px;
 }
 .fullscreen-enabled .display{
     width:100%;
@@ -13,4 +14,14 @@
     position: relative;
     width:50%;
     height:100%;
+}
+
+.Home{
+    width: 720px;
+    max-width: 720px;
+}
+
+.FullScreenButton{
+    margin: 0 auto;
+    text-align: center;
 }

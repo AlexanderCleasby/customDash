@@ -45,16 +45,16 @@ export default class Display extends Component{
 
     render(){
         return (
-            <Fragment>
+            <div className="Home">
                 <Fullscreen enabled={this.state.isFull}onChange={ isFull => this.setState({isFull})}>
                     <div className="full-screenable-node display">
                         {this.state.widgets}
                     </div>
                 </Fullscreen>
-                    <Button onClick={()=>this.setState({isFull:true})} >
-                        Go Fullscreen
-                    </Button>
-        </Fragment>
+                <Button block size="lg" color="primary" className="FullScreenButton" onClick={()=>this.setState({isFull:true})} >
+                    Go Fullscreen
+                </Button>
+            </div>
         )
     }
 } 
