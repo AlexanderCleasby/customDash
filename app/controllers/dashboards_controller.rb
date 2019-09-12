@@ -40,18 +40,28 @@ class DashboardsController < ApplicationController
   # PATCH/PUT /dashboards/1
   def update
     if @dashboard.update(dashboard_params)
+      retained_ids=[]
       params[:widgets].each do |widget|
         widget.permit!
-        if !Widget.find_by({id:widget[:id]})
+        if Widget.find_by({id:widget[:id]})
+          @widget=Widget.find(widget[:id])
+          if @widget.update(widget)
+            retained_ids.push(@widget.id)
+          end
+        else
+          widget = widget.except("id")
           @widget = Widget.new(widget)
           @widget.dashboard=@dashboard
-          @widget.save
-        else
-          @widget=Widget.find(widget[:id])
-          widget = widget.except("id")
-          @widget.update(widget)
+          if @widget.save
+            retained_ids.push(@widget.id)
+          end
         end
-
+      end
+      
+      @dashboard.widgets.each do |widget| 
+        if !retained_ids.include?(widget.id) then
+          widget.delete
+        end
       end
       render json: @dashboard
     else
