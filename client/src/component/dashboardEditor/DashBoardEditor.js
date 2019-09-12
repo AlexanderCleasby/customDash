@@ -32,11 +32,12 @@ export default class DashBoardEditor extends Component {
   randomColor=()=>randomColor({luminosity: 'light'})
 
   pushToCloud = ()=>{
-    fetch(`/dashboards/?token=${localStorage.dashToken}`,{
+    let [route,method] = this.props.match.params.id ? [`/dashboards/${this.props.match.params.id}`,"PUT"] : [`/dashboards`,"POST"]
+    fetch(`${route}/?token=${localStorage.dashToken}`,{
       headers: {
         "Content-Type": "application/json"
       },
-      method:"POST",
+      method:method,
       body: JSON.stringify({
             dashboard: {
               name: this.state.name,
@@ -44,6 +45,7 @@ export default class DashBoardEditor extends Component {
               height: this.state.height,
             },
             widgets:this.state.placedWidgets.map((widget)=>({
+              id:widget.props.id,
               widget_type:widget.type,
               ops:widget.ops(),
               x:widget.state.x,
@@ -72,10 +74,10 @@ export default class DashBoardEditor extends Component {
     let newWidget
     switch (type.toLowerCase()) {
       case "map":
-        newWidget=<MapWidget {...widget} id={uuid()} color={randomColor()} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} deleteWidget={this.deleteWidget} />
+        newWidget=<MapWidget id={uuid()} {...widget}  color={randomColor()} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} deleteWidget={this.deleteWidget} />
         break;
       case "ticker":
-        newWidget=<TickerWidget {...widget}  id={uuid()} color={randomColor()} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} deleteWidget={this.deleteWidget} />
+        newWidget=<TickerWidget id={uuid()} {...widget} color={randomColor()} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} deleteWidget={this.deleteWidget} />
         break
       default:
         return false
