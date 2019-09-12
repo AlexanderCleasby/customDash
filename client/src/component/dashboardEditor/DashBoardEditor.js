@@ -72,11 +72,10 @@ export default class DashBoardEditor extends Component {
     let newWidget
     switch (type.toLowerCase()) {
       case "map":
-      
-      newWidget=<MapWidget {...widget} id={uuid()} color={randomColor()} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} deleteWidget={this.deleteWidget} />
+        newWidget=<MapWidget {...widget} id={uuid()} color={randomColor()} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} deleteWidget={this.deleteWidget} />
         break;
       case "ticker":
-        newWidget=<TickerWidget id={uuid()} color={randomColor()} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} deleteWidget={this.deleteWidget} />
+        newWidget=<TickerWidget {...widget}  id={uuid()} color={randomColor()} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} deleteWidget={this.deleteWidget} />
         break
       default:
         return false
