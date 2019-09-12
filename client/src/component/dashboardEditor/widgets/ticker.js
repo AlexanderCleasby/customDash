@@ -11,7 +11,7 @@ export default class TickerWidget extends widget{
 
     AddTicker=(e)=>{
         e.preventDefault()
-        this.setState({tickers:[...this.state.tickers,this.state.TickerInput]})
+        this.setState(prevstate=>({...prevstate,tickers:[...this.state.tickers,this.state.TickerInput],TickerInput:''}))
     }
     type="ticker"
     ops=()=>{
