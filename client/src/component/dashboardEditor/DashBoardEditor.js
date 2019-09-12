@@ -66,8 +66,10 @@ export default class DashBoardEditor extends Component {
   widgetTypes=["Map","Ticker"]
 
   createNewWidget=(type,widget)=>{
-    if(widget){delete widget.id}
-    debugger
+    if(widget){
+      //delete widget.id
+      widget.addToPlaced=this.addToPlaced}
+    
     let newWidget
     switch (type.toLowerCase()) {
       case "map":
@@ -80,11 +82,13 @@ export default class DashBoardEditor extends Component {
       default:
         return false
     }
-    //console.log(newWidget)
-    this.setState({"stagedWidgets":[...this.state.stagedWidgets,newWidget]},()=>{
-      if (widget){this.setState({placedWidgets:[...this.state.stagedWidgets]})}
-    })
-      
+    
+    this.setState({"stagedWidgets":[...this.state.stagedWidgets,newWidget]})
+    
+  }
+
+  addToPlaced=(widget)=>{
+    this.setState({placedWidgets:[...this.state.placedWidgets,widget]})
   }
 
   deleteWidget=(id)=>{
@@ -121,7 +125,7 @@ export default class DashBoardEditor extends Component {
   valchangeInt = (e)=>this.setState({[e.target.name]:parseInt(e.target.value)})
 
   render() {
-    console.log(this.state.stagedWidgets[0])
+    console.table(this.state.placedWidgets.map((widget)=>widget.state))
     return ( 
         <Fragment>
           <div className="nameHeader">
@@ -130,7 +134,7 @@ export default class DashBoardEditor extends Component {
           </div>
         <div className = "DashBoardEditor" >
         
-          <Matrix dropWidget={this.dropWidget}  pickedUpWidget={this.state.pickedUpWidget} handleDragOver={this.handleMatrixDragOver} placedWidgets={this.state.stagedWidgets} width={this.state.width} height={this.state.height} / >
+          <Matrix dropWidget={this.dropWidget}  pickedUpWidget={this.state.pickedUpWidget} handleDragOver={this.handleMatrixDragOver} placedWidgets={this.state.placedWidgets} width={this.state.width} height={this.state.height} / >
           <div className='sidebar'>
             {this.state.stagedWidgets}
             <div className='footer'>

@@ -17,7 +17,10 @@ export default class Widget extends Component {
   };
   }
   
-
+  componentDidMount(){
+    if (this.props.addToPlaced){
+      this.props.addToPlaced(this)}
+  }
   
 
   valChangeInt=(e)=>{
