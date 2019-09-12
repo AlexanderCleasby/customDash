@@ -12,21 +12,3 @@ code {
     monospace;
 }
 
-.DashBoardEditor {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0% 4%;
-}
-
-.sidebar {
-  color:white;
-  width: 20%;
-  background-color: rgb(66, 66, 66);
-  min-width: 4px;
-  position: relative;
-  .footer {
-    position: absolute;
-    bottom: 0;
-    padding:15px;
-  }
-}

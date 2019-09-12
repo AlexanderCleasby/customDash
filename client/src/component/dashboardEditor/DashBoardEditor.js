@@ -136,7 +136,9 @@ export default class DashBoardEditor extends Component {
         
           <Matrix dropWidget={this.dropWidget}  pickedUpWidget={this.state.pickedUpWidget} handleDragOver={this.handleMatrixDragOver} placedWidgets={this.state.placedWidgets} width={this.state.width} height={this.state.height} / >
           <div className='sidebar'>
-            {this.state.stagedWidgets}
+            <div className="main">
+              {this.state.stagedWidgets}
+            </div>
             <div className='footer'>
               <a>New Widget:</a>
               <select name="newWidgetType" onChange={this.valchange}>
