@@ -6,8 +6,7 @@ class DashboardsController < ApplicationController
   # GET /dashboards
   def index
     @dashboards = current_user.dashboards
-
-    render json: @dashboards
+    render json: @dashboards, each_serializer: DashboardSummarySerializer  
   end
 
   # GET /dashboards/1
