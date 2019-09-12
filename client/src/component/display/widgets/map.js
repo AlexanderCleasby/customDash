@@ -16,6 +16,13 @@ export default  class MapWidgetDisplay extends Component  {
         zoom: 11
     };
 
+   options = {
+        disableDefaultUI: true,
+        gestureHandling: 'none',
+        zoomControl: false
+    }
+
+
     widgetStyles = ()=>({
             position:'absolute',
             top:DecimalToPercent(this.props.x/this.props.dashHeight),
@@ -33,7 +40,7 @@ export default  class MapWidgetDisplay extends Component  {
                 bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_KEY }}
                 defaultCenter={this.props.ops.coords}
                 defaultZoom={this.props.zoom}
-                options={{disableDefaultUI: true}}
+                options={this.options}
                 yesIWantToUseGoogleMapApiInternals
                 />
             </div>
