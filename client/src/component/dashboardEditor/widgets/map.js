@@ -22,10 +22,10 @@ export default class MapWidget extends widget{
     renderBody(){
         return (
         <div>
-            <label>Lon:</label>
-            <input name="lng" type="number" value={this.state.lng} onChange={this.valChangeFloat}  />
             <label>Lat:</label>
             <input name="lat" type="number" value={this.state.lat} onChange={this.valChangeFloat}  />
+            <label>Lon:</label>
+            <input name="lng" type="number" value={this.state.lng} onChange={this.valChangeFloat}  />
         </div>)
     }
 }
