@@ -8,9 +8,9 @@ export default class MapWidget extends widget{
         super(props)
         this.state={
             ...this.state,
-            lng:null,
-            lat:null,
-            zoom:1
+            lng:this.props.ops ? this.props.ops.coords.lng : null,
+            lat:this.props.ops ? this.props.ops.coords.lat : null,
+            zoom:this.props.ops ? this.props.ops.zoomLevel : 1
         }
         
     }
@@ -23,9 +23,9 @@ export default class MapWidget extends widget{
         return (
         <div>
             <label>Lon:</label>
-            <input name="lng" type="number" onChange={this.valChangeFloat}  />
+            <input name="lng" type="number" value={this.state.lng} onChange={this.valChangeFloat}  />
             <label>Lat:</label>
-            <input name="lat" type="number" onChange={this.valChangeFloat}  />
+            <input name="lat" type="number" value={this.state.lat} onChange={this.valChangeFloat}  />
         </div>)
     }
 }
