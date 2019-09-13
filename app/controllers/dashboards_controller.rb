@@ -22,6 +22,7 @@ class DashboardsController < ApplicationController
 
     params[:widgets].each do |widget| 
       widget.permit!
+      widget = widget.except("id")
       @widget = Widget.new(widget)
       @widget.dashboard=@dashboard
       if !@widget.save
