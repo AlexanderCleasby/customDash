@@ -1,7 +1,7 @@
 import React,{ Component, Fragment } from 'react';
 import Fullscreen from "react-full-screen";
 import { Button } from 'reactstrap'
-import Ticker from './widgets/ticker'
+import Ticker from './widgets/ticker/ticker'
 import Map from './widgets/map'
 import './display.scss'
 export default class Display extends Component{
@@ -37,6 +37,8 @@ export default class Display extends Component{
             switch (widget.widget_type) {
                 case "map":
                     return <Map {...widget} />
+                case "ticker":
+                    return <Ticker {...widget} />
                 default:
                     return <div />
             }

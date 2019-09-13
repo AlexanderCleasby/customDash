@@ -35,7 +35,7 @@ export default  class MapWidgetDisplay extends Component  {
     render() {
         console.log(this.props)
         return (
-            <div style={this.widgetStyles()} >
+            <div className={"displayWidget"} style={this.widgetStyles()} >
                 <GoogleMapReact
                 bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_KEY }}
                 defaultCenter={this.props.ops.coords}

@@ -10,6 +10,18 @@
     height: 100%;
 }
 
+.displayWidget{
+    color:white;
+}
+
+.ticker{
+    background-color: rgb(80, 80, 80);
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content:space-evenly;
+}
+
 .map{
     position: relative;
     width:50%;
