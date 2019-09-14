@@ -54,6 +54,4 @@ class App extends Component {
     }
 }
 
-const stateToProps = (state)=>state
-
-export default connect(stateToProps,changeUser)(App);
+export default connect(state=>({user:state.user}),changeUser)(App);
