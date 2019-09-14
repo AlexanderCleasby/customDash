@@ -2,12 +2,18 @@
     height: 100%;
     width:20%;
     background-color: black;
+    .name{
+        height:20%;
+    }
     .price{
-        height:80%;
+        height:60%;
         width:100%;
         font-size: 2vw;
         text-align: center;
         vertical-align: middle;
+    }
+    .symobol{
+        height:20%;
     }
 }
 
