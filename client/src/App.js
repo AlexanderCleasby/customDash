@@ -43,7 +43,7 @@ class App extends Component {
       else{
         return(
         <div className="App">
-          <NavBar />
+          <NavBar user={this.props.user} />
           <Route path="/" exact component={Home}  />
           <Route path="/new" exact component={DashBoardEditor} />
           <Route path="/edit/:id" component={DashBoardEditor} />

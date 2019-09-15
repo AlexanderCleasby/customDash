@@ -11,14 +11,14 @@ class AuthenticationController < ApplicationController
       
       login = user_info[:login]
       name = user_info[:name]
-      puts login
+      avatar_url = user_info[:avatar_url]
   
       # Generate token...
       token = TokenEncoder.encode(login)
       # ... create user if it doesn't exist...
       User.where(login: login).first_or_create!(
         name: name,
-        #avatar_url: avatar_url
+        avatar_url: avatar_url
       )
       puts "here: "+token
       # ... and redirect to client app.
