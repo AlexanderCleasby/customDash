@@ -2,10 +2,14 @@ import React from 'react';
 import widget from './widget'
 import { faChartLine } from '@fortawesome/free-solid-svg-icons'
 
-export default class TickerWidget extends widget{
-    constructor(props){
+export default class TickerWidget extends widget {
+    constructor(props) {
         super(props)
-        this.state={...this.state,tickers:[],TickerInput:''}
+        this.state = {
+            ...this.state,
+            tickers: this.props.ops.tickers||[],
+            TickerInput: ''
+        }
     }
     icon=faChartLine
 
