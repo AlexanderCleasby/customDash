@@ -6,7 +6,11 @@ class DashboardsController < ApplicationController
   # GET /dashboards
   def index
     @dashboards = current_user.dashboards
-    render json: @dashboards, each_serializer: DashboardSummarySerializer  
+    if !params[:detail]
+      render json: @dashboards, each_serializer: DashboardSummarySerializer  
+    else
+      render json: @dashboards
+    end
   end
 
   # GET /dashboards/1

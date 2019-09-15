@@ -8,7 +8,7 @@ import uuid from 'uuid'
 import TickerWidget from './widgets/ticker'
 import MapWidget from './widgets/map'
 import Matrix from './matrix/matrix'
-import Widget from './widgets/widget';
+
 
 export default class DashBoardEditor extends Component {
   constructor(props){
@@ -61,7 +61,6 @@ export default class DashBoardEditor extends Component {
   importDashboard = (dashboard)=>{
     this.setState((prevState)=>({...prevState,name:dashboard.name,width:dashboard.width,height:dashboard.height}))
     dashboard.widgets.forEach((widget)=>this.createNewWidget(widget.widget_type,widget))
-    //this.setState({placedWidgets:this.createWidgets(dashboard.widgets)})
   }
 
   widgetTypes=["Map","Ticker"]
