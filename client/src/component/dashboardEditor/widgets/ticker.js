@@ -26,7 +26,7 @@ export default class TickerWidget extends widget {
         return <div>
                 <label>Tickers:</label>
                 <br></br>
-                {this.state.tickers.map(ticker => <div>{ticker}</div>)}
+                {this.state.tickers.map((ticker,i) => <div key={i}>{ticker}</div>)}
                 <form onSubmit={this.AddTicker}>
                     <input name="TickerInput" value={this.state.TickerInput} onChange={this.valChange} />
                     <input type='submit' />
