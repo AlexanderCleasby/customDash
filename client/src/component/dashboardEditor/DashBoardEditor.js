@@ -8,25 +8,33 @@ import uuid from 'uuid'
 import TickerWidget from './widgets/ticker'
 import MapWidget from './widgets/map'
 import Matrix from './matrix/matrix'
+import {connect} from 'react-redux'
 
 
-export default class DashBoardEditor extends Component {
+
+class DashBoardEditor extends Component {
   constructor(props){
-    super()
+    super(props)
+    
+    let dashboard=props.dashboards.find((dashboard)=>dashboard.id===parseInt(props.match.params.id))
+    //let widgets = dashboard ?dashboard.widgets.map((widget)=>this.createNewWidget(widget.widget_type,widget)):[]
     this.state={
-      name:'',
+      name:dashboard ? dashboard.name : '',
       placedWidgets:[],
       stagedWidgets:[],
+      //stagedWidgets:dashboard ? dashboard.widgets.map((widget=>this.createNewWidget(widget.widget_type,widget))):[],
       pickedUpWidget:{state:{x:null,y:null,width:0,height:0}},
-      width:props.width||5,
-      height:props.height||5,
+      width:dashboard ? dashboard.width:5,
+      height:dashboard ? dashboard.height:5,
       newWidgetType:this.widgetTypes[0]
     }
-    if (props.match.params.id){
-      fetch(`/dashboards/${props.match.params.id}/?token=${window.localStorage.dashToken}`)
-      .then(res=>res.json())
-      .then(res=>this.importDashboard(res))
-    }
+  }
+
+  componentDidMount(){
+    
+    let dashboard=this.props.dashboards.find((dashboard)=>dashboard.id===parseInt(this.props.match.params.id))
+    if (dashboard){this.importDashboard(dashboard)}
+    
   }
 
   randomColor=()=>randomColor({luminosity: 'light'})
@@ -59,8 +67,15 @@ export default class DashBoardEditor extends Component {
   }
 
   importDashboard = (dashboard)=>{
-    this.setState((prevState)=>({...prevState,name:dashboard.name,width:dashboard.width,height:dashboard.height}))
-    dashboard.widgets.forEach((widget)=>this.createNewWidget(widget.widget_type,widget))
+    this.setState((prevState) => ({
+      ...prevState,
+      name: dashboard.name,
+      width: dashboard.width,
+      height: dashboard.height,
+      stagedWidgets: dashboard.widgets.map((widget) => this.createNewWidget(widget.widget_type, widget))
+    }))
+    //dashboard.widgets.forEach((widget)=>this.createNewWidget(widget.widget_type,widget))
+    
   }
 
   widgetTypes=["Map","Ticker"]
@@ -68,26 +83,36 @@ export default class DashBoardEditor extends Component {
   createNewWidget=(type,widget)=>{
     if(widget){
       //delete widget.id
-      widget.addToPlaced=this.addToPlaced}
+      widget.addToPlaced=this.addToPlaced
+      widget.placed=true
+    }
     
     let newWidget
     switch (type.toLowerCase()) {
       case "map":
-        newWidget=<MapWidget id={uuid()} {...widget}  color={randomColor()} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} deleteWidget={this.deleteWidget} />
+        //newWidget = new MapWidget({...widget})
+        newWidget=<MapWidget key={uuid()} id={uuid()} {...widget}  color={randomColor()} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} deleteWidget={this.deleteWidget} />
         break;
       case "ticker":
-        newWidget=<TickerWidget id={uuid()} {...widget} color={randomColor()} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} deleteWidget={this.deleteWidget} />
+        //newWidget = new TickerWidget({...widget})
+        newWidget=<TickerWidget key={uuid()} id={uuid()} {...widget} color={randomColor()} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} deleteWidget={this.deleteWidget} />
         break
       default:
         return false
     }
+    return newWidget
     
     this.setState({"stagedWidgets":[...this.state.stagedWidgets,newWidget]})
     
   }
 
   addToPlaced=(widget)=>{
-    this.setState({placedWidgets:[...this.state.placedWidgets,widget]})
+    console.log([...this.state.placedWidgets,widget])
+    
+    //this.setState({placedWidgets:[...this.state.placedWidgets,widget]})
+    this.setState((prevState)=>{
+      return {...prevState,placedWidgets:[...prevState.placedWidgets,widget]}
+    })
   }
 
   deleteWidget=(id)=>{
@@ -124,7 +149,6 @@ export default class DashBoardEditor extends Component {
   valchangeInt = (e)=>this.setState({[e.target.name]:parseInt(e.target.value)})
 
   render() {
-    console.table(this.state.placedWidgets.map((widget)=>widget.state))
     return ( 
         <Fragment>
           <div className="nameHeader">
@@ -139,11 +163,11 @@ export default class DashBoardEditor extends Component {
               {this.state.stagedWidgets}
             </div>
             <div className='footer'>
-              <a>New Widget:</a>
+              <label>New Widget:</label>
               <select name="newWidgetType" onChange={this.valchange}>
                 {this.widgetTypes.map((type,i)=><option key={i}>{type}</option>)}
               </select>
-              <Button onClick={()=>this.createNewWidget(this.state.newWidgetType)}>Create</Button>
+              <Button onClick={()=>this.setState({"stagedWidgets":[...this.state.stagedWidgets,this.createNewWidget(this.state.newWidgetType)]})}>Create</Button>
             </div>
           </div>
           <label>Width: </label><input name="width" type="number" onChange={this.valchangeInt} value={this.state.width} />
@@ -155,3 +179,6 @@ export default class DashBoardEditor extends Component {
     )
   };
 }
+
+export default connect(state=>state)(DashBoardEditor)
+

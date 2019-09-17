@@ -1,13 +1,18 @@
 import React, {Component} from 'react'
 import Dashboards from './dashboards'
 import {connect} from 'react-redux'
-import {dashboardSummary} from '../../utility/apiCalls'
+import {dashboardSummary,dashboardDetail} from '../../utility/apiCalls'
 import dashboardActions from '../../actions/dashboardActions'
 class Home  extends Component{
 
     componentDidMount(){
-        dashboardSummary()
-        .then(res=>this.setState(this.props.updateDashboards(res)))
+        if (this.props.dashboards.length === 0) {
+            dashboardSummary()
+            .then(res => this.props.updateDashboards(res))
+            .then(()=>dashboardDetail()
+                .then(res => this.props.updateDashboards(res))
+            )
+        }
     }
 
     render(){

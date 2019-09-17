@@ -33,7 +33,7 @@ class App extends Component {
   }
 
   render(){
-    
+
     if(!this.props.user.name){
       return (
         <div className="App">
@@ -54,4 +54,4 @@ class App extends Component {
     }
 }
 
-export default connect(state=>({user:state.user}),changeUser)(App);
+export default connect(state=>state,changeUser)(App);
