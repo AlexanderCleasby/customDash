@@ -11,19 +11,14 @@ import MapWidget from './widgets/map'
 import Matrix from './matrix/matrix'
 import {connect} from 'react-redux'
 
-
-
 class DashBoardEditor extends Component {
   constructor(props){
     super(props)
-    
     let dashboard=props.dashboards.find((dashboard)=>dashboard.id===parseInt(props.match.params.id))
-    //let widgets = dashboard ?dashboard.widgets.map((widget)=>this.createNewWidget(widget.widget_type,widget)):[]
     this.state={
       name:dashboard ? dashboard.name : '',
       placedWidgets:[],
       stagedWidgets:[],
-      //stagedWidgets:dashboard ? dashboard.widgets.map((widget=>this.createNewWidget(widget.widget_type,widget))):[],
       pickedUpWidget:{state:{x:null,y:null,width:0,height:0}},
       width:dashboard ? dashboard.width:5,
       height:dashboard ? dashboard.height:5,
@@ -50,7 +45,6 @@ class DashBoardEditor extends Component {
   }
 
   importDashboard = (dashboard)=>{
-    
     this.setState((prevState) => ({
       ...prevState,
       name: dashboard.name,
@@ -58,42 +52,31 @@ class DashBoardEditor extends Component {
       height: dashboard.height,
       stagedWidgets: dashboard.widgets.map((widget) => this.createNewWidget(widget.widget_type, widget))
     }))
-    //dashboard.widgets.forEach((widget)=>this.createNewWidget(widget.widget_type,widget))
-    
   }
 
   widgetTypes=["Map","Ticker"]
 
   createNewWidget=(type,widget)=>{
     if(widget){
-      //delete widget.id
       widget.addToPlaced=this.addToPlaced
       widget.placed=true
     }
-    
+
     let newWidget
     switch (type.toLowerCase()) {
       case "map":
-        //newWidget = new MapWidget({...widget})
         newWidget=<MapWidget key={uuid()} id={uuid()} {...widget}  color={randomColor()} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} deleteWidget={this.deleteWidget} />
         break;
       case "ticker":
-        //newWidget = new TickerWidget({...widget})
         newWidget=<TickerWidget key={uuid()} id={uuid()} {...widget} color={randomColor()} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} deleteWidget={this.deleteWidget} />
         break
       default:
         return false
     }
     return newWidget
-    
-    this.setState({"stagedWidgets":[...this.state.stagedWidgets,newWidget]})
-    
   }
 
   addToPlaced=(widget)=>{
-    console.log([...this.state.placedWidgets,widget])
-    
-    //this.setState({placedWidgets:[...this.state.placedWidgets,widget]})
     this.setState((prevState)=>{
       return {...prevState,placedWidgets:[...prevState.placedWidgets,widget]}
     })
@@ -116,7 +99,6 @@ class DashBoardEditor extends Component {
       newState.state.x = coords.x
       newState.state.y = coords.y
       return {pickedUpWidget:newState}
-      
     })
   }
 
