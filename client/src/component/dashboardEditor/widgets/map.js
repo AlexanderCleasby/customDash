@@ -8,8 +8,8 @@ export default class MapWidget extends widget{
         super(props)
         this.state={
             ...this.state,
-            lng:this.props.ops ? this.props.ops.coords.lng : null,
-            lat:this.props.ops ? this.props.ops.coords.lat : null,
+            lng:this.props.ops ? this.props.ops.coords.lng : '',
+            lat:this.props.ops ? this.props.ops.coords.lat : '',
             zoom:this.props.ops ? this.props.ops.zoomLevel : 1
         }
         
