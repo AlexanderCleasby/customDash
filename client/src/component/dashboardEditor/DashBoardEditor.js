@@ -4,6 +4,7 @@ import React, {
 import './dashboardEditor.scss'
 import {Button} from 'reactstrap'
 import randomColor from 'randomcolor'
+import {getDashboard} from '../../utility/apiCalls'
 import uuid from 'uuid'
 import TickerWidget from './widgets/ticker'
 import MapWidget from './widgets/map'
@@ -33,7 +34,12 @@ class DashBoardEditor extends Component {
   componentDidMount(){
     
     let dashboard=this.props.dashboards.find((dashboard)=>dashboard.id===parseInt(this.props.match.params.id))
-    if (dashboard){this.importDashboard(dashboard)}
+    if (dashboard) {
+      this.importDashboard(dashboard)
+    } else {
+      getDashboard(this.props.match.params.id)
+        .then(res=>this.importDashboard(res))
+    }
     
   }
 
@@ -67,6 +73,7 @@ class DashBoardEditor extends Component {
   }
 
   importDashboard = (dashboard)=>{
+    debugger
     this.setState((prevState) => ({
       ...prevState,
       name: dashboard.name,

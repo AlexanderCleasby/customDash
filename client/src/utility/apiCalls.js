@@ -13,3 +13,12 @@ export function dashboardDetail(){
         .then(res => resolve(res))
 })
 }
+
+export function getDashboard(id){
+    return new Promise((resolve,reject) => {
+        fetch(`/dashboards/${id}/?token=${window.localStorage.dashToken}`)
+        .then(res => res.json())
+        .then(res => resolve(res))
+    })
+}
+
