@@ -73,7 +73,7 @@ class DashBoardEditor extends Component {
   }
 
   importDashboard = (dashboard)=>{
-    debugger
+    
     this.setState((prevState) => ({
       ...prevState,
       name: dashboard.name,
