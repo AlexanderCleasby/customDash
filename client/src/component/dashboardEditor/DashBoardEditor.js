@@ -4,7 +4,7 @@ import React, {
 import './dashboardEditor.scss'
 import {Button} from 'reactstrap'
 import randomColor from 'randomcolor'
-import {getDashboard} from '../../utility/apiCalls'
+import {getDashboard, saveDashboard} from '../../utility/apiCalls'
 import uuid from 'uuid'
 import TickerWidget from './widgets/ticker'
 import MapWidget from './widgets/map'
@@ -36,7 +36,7 @@ class DashBoardEditor extends Component {
     let dashboard=this.props.dashboards.find((dashboard)=>dashboard.id===parseInt(this.props.match.params.id))
     if (dashboard) {
       this.importDashboard(dashboard)
-    } else {
+    } else if(this.props.match.params.id){
       getDashboard(this.props.match.params.id)
         .then(res=>this.importDashboard(res))
     }
@@ -46,30 +46,7 @@ class DashBoardEditor extends Component {
   randomColor=()=>randomColor({luminosity: 'light'})
 
   pushToCloud = ()=>{
-    let [route,method] = this.props.match.params.id ? [`/dashboards/${this.props.match.params.id}`,"PUT"] : [`/dashboards`,"POST"]
-    fetch(`${route}/?token=${localStorage.dashToken}`,{
-      headers: {
-        "Content-Type": "application/json"
-      },
-      method:method,
-      body: JSON.stringify({
-            dashboard: {
-              name: this.state.name,
-              width: this.state.width,
-              height: this.state.height,
-            },
-            widgets:this.state.placedWidgets.map((widget)=>({
-              id:widget.props.id,
-              widget_type:widget.type,
-              ops:widget.ops(),
-              x:widget.state.x,
-              y:widget.state.y,
-              width:widget.state.width,
-              height:widget.state.height
-            }))
-      })
-    }).then(res=>res.json())
-    .then(res=>window.location.href = `/display/${res.id}`)
+    saveDashboard(this.props.match.params.id,this.state).then(res=>window.location.href = `/display/${res.id}`)
   }
 
   importDashboard = (dashboard)=>{
