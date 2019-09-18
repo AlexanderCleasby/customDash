@@ -7,7 +7,7 @@ export default class TickerWidget extends widget {
         super(props)
         this.state = {
             ...this.state,
-            tickers: this.props.ops.tickers||[],
+            tickers: this.props.ops ? this.props.ops.tickers:[],
             TickerInput: ''
         }
     }
