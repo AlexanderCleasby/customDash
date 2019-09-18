@@ -8,3 +8,8 @@ export const importDashboardDetail = ()=>{
             .then(dashboards=>dispatch({type:"UPDATE_DASHBOARDS",dashboards:dashboards})))
     }
 }
+
+export const updateDashboard = (dispatch)=>{
+    return (dashboard)=>{
+        dispatch({type:"SAVE_DASHBOARD",dashboard:dashboard})}}
+    

@@ -5,6 +5,7 @@ import './dashboardEditor.scss'
 import {Button} from 'reactstrap'
 import randomColor from 'randomcolor'
 import {getDashboard, saveDashboard} from '../../utility/apiCalls'
+import {updateDashboard} from '../../actions/dashboardActions'
 import uuid from 'uuid'
 import TickerWidget from './widgets/ticker'
 import MapWidget from './widgets/map'
@@ -35,13 +36,19 @@ class DashBoardEditor extends Component {
       getDashboard(this.props.match.params.id)
         .then(res=>this.importDashboard(res))
     }
-    
+    //TODO: this should add the one dashboard to the redux store.
   }
 
   randomColor=()=>randomColor({luminosity: 'light'})
 
   pushToCloud = ()=>{
-    saveDashboard(this.props.match.params.id,this.state).then(res=>window.location.href = `/display/${res.id}`)
+    //debugger
+    saveDashboard(this.props.match.params.id,this.state)
+    .then(res=>{
+      
+      console.log(res)
+      this.props.updateDashboard(res)})
+    //.then(()=>this.props.history.push(`/display/${this.props.match.params.id}`))
   }
 
   importDashboard = (dashboard)=>{
@@ -146,5 +153,5 @@ class DashBoardEditor extends Component {
   };
 }
 
-export default connect(state=>state)(DashBoardEditor)
+export default connect(state=>state, (dispatch)=>({updateDashboard:updateDashboard(dispatch)}))(DashBoardEditor)
 
