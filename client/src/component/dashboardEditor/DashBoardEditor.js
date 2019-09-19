@@ -44,11 +44,8 @@ class DashBoardEditor extends Component {
   pushToCloud = ()=>{
     //debugger
     saveDashboard(this.props.match.params.id,this.state)
-    .then(res=>{
-      
-      console.log(res)
-      this.props.updateDashboard(res)})
-    //.then(()=>this.props.history.push(`/display/${this.props.match.params.id}`))
+    .then(res=>{this.props.updateDashboard(res)})
+    .then(()=>this.props.history.push(`/display/${this.props.match.params.id}`))
   }
 
   importDashboard = (dashboard)=>{
