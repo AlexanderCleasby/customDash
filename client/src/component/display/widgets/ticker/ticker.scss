@@ -1,16 +1,24 @@
 .quoteContainer{
-    height: 100%;
-    width:20%;
+    max-height: 15em;
+    max-width: 15em;
+    align-self: center;
     background-color: black;
+    padding:1%;
+    border: solid white 1px;
     .name{
         height:20%;
     }
     .price{
         height:60%;
         width:100%;
-        font-size: 2vw;
+        font-size: 150%;
         text-align: center;
         vertical-align: middle;
+        .change{
+            padding-left: 5px;
+            display: inline;
+            font-size:70%;
+        }
     }
     .symobol{
         height:20%;
@@ -18,7 +26,11 @@
 }
 
 .fullscreen-enabled .quoteContainer{
+    font-size:1.5vw;
     .price{
-        font-size:5vw;
+        font-size:2vw;
+        .change{
+            height:2vw;
+        }
     }
 }
