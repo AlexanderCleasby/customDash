@@ -1,7 +1,7 @@
 import React from "react";
 
 
-export const QuoteDisplay = (quote)=>{
+export const QuoteDisplay = (quote,size)=>{
     console.log(quote)
     return (
         <div className="quoteContainer">
@@ -9,7 +9,10 @@ export const QuoteDisplay = (quote)=>{
                 {quote.companyName}
             </div>
             <div className="price">
-                {quote.iexRealtimePrice}
+                {quote.iexRealtimePrice || quote.latestPrice}
+                <div className="change" style={{color:quote.change < 0 ? 'red': 'green'}}>
+                    {quote.change}%
+                </div>
             </div>
             <div className="symobol">
                 {quote.symbol}
