@@ -31,14 +31,14 @@ export default class Display extends Component{
 
     createWidgets=(widgets)=>{
         
-        return widgets.map((widget)=>{
+        return widgets.map((widget,i)=>{
             widget.dashHeight=this.state.dashHeight
             widget.dashWidth=this.state.dashWidth
             switch (widget.widget_type) {
                 case "map":
-                    return <Map {...widget} />
+                    return <Map key={i} {...widget} />
                 case "ticker":
-                    return <Ticker {...widget} />
+                    return <Ticker key={i} {...widget} />
                 default:
                     return <div />
             }

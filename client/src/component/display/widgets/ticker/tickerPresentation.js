@@ -1,10 +1,10 @@
 import React from "react";
 
 
-export const QuoteDisplay = (quote,size)=>{
+export const QuoteDisplay = (quote,i)=>{
     console.log(quote)
     return (
-        <div className="quoteContainer">
+        <div key={i} className="quoteContainer">
             <div className="name">
                 {quote.companyName}
             </div>

@@ -35,7 +35,7 @@ export default  class TickeridgetDisplay extends Component {
 
     render(){
         return(<div className="ticker displayWidget" style={this.widgetStyles()}>
-            {this.state.quote.map(quote=>QuoteDisplay(quote))}
+            {this.state.quote.map((quote,i)=>QuoteDisplay(quote,i))}
         </div>)
     }
 }
