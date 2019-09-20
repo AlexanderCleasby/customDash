@@ -15,11 +15,12 @@
 }
 
 .ticker{
-    background-color: rgb(80, 80, 80);
+    background-color: rgba(255, 255, 255, 0);
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content:space-evenly;
+    overflow: hidden;
 }
 
 .map{
