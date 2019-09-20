@@ -65,14 +65,15 @@ class DashBoardEditor extends Component {
       widget.addToPlaced=this.addToPlaced
       widget.placed=true
     }
+    let widgetProps={key:uuid(),id:uuid(),color:randomColor(),handleDragStart:this.handleDragStart,hadnleDragEnd:this.hadnleDragEnd,deleteWidget:this.deleteWidget}
 
     let newWidget
     switch (type.toLowerCase()) {
       case "map":
-        newWidget=<MapWidget key={uuid()} id={uuid()} {...widget}  color={randomColor()} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} deleteWidget={this.deleteWidget} />
+        newWidget=<MapWidget {...widgetProps} {...widget}   />
         break;
       case "ticker":
-        newWidget=<TickerWidget key={uuid()} id={uuid()} {...widget} color={randomColor()} handleDragStart={this.handleDragStart} hadnleDragEnd={this.hadnleDragEnd} deleteWidget={this.deleteWidget} />
+        newWidget=<TickerWidget {...widgetProps} {...widget}  />
         break
       default:
         return false
