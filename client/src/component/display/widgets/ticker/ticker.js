@@ -12,11 +12,17 @@ export default  class TickeridgetDisplay extends Component {
         }
     }
     componentDidMount(){
+        this.updateQuotes()
+        setInterval(this.updateQuotes,1000*60)
+    }
+
+    updateQuotes = () => {
         getQuote([this.props.ops.tickers])
-        .then(res=>{
-            this.setState({quote:Object.keys(res).map(ticker=>res[ticker].quote)})
-        })
-        console.log(this.state.quote)
+            .then(res => {
+                this.setState({
+                    quote: Object.keys(res).map(ticker => res[ticker].quote)
+                })
+            })
     }
 
     widgetStyles = ()=>({
