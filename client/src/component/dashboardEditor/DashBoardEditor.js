@@ -66,7 +66,15 @@ class DashBoardEditor extends Component {
       widget.addToPlaced=this.addToPlaced
       widget.placed=true
     }
-    let widgetProps={key:uuid(),id:uuid(),color:randomColor(),handleDragStart:this.handleDragStart,hadnleDragEnd:this.hadnleDragEnd,deleteWidget:this.deleteWidget}
+    let widgetProps = {
+      key: uuid(),
+      id: uuid(),
+      color: randomColor(),
+      handleDragStart: this.handleDragStart,
+      hadnleDragEnd: this.hadnleDragEnd,
+      deleteWidget: this.deleteWidget,
+      forceUpdate: ()=>{this.forceUpdate()}
+    }
 
     let newWidget
     switch (type.toLowerCase()) {

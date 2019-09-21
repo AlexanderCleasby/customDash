@@ -17,6 +17,10 @@ export default class Widget extends Component {
   };
   }
   
+  dimChange=(e)=>{
+    this.setState({[e.target.name]:parseInt(e.target.value)},this.props.forceUpdate)
+  }
+
   componentDidMount(){
     if (this.props.addToPlaced){
       this.props.addToPlaced(this)}
@@ -56,8 +60,8 @@ export default class Widget extends Component {
           </div>
           {this.renderBody()}
           <div>
-            <input name="width" type="number" onChange={this.valChangeInt} value={this.state.width} className="sizeInput" />
-            <input name="height" type="number" onChange={this.valChangeInt} value={this.state.height} className="sizeInput"  />
+            <input name="width" type="number" onChange={this.dimChange} value={this.state.width} className="sizeInput" />
+            <input name="height" type="number" onChange={this.dimChange} value={this.state.height} className="sizeInput"  />
           </div>
         </div>
       );
