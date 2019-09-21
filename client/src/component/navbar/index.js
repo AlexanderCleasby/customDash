@@ -19,7 +19,7 @@ export default  (props)=>{
             </Nav>
             <Nav className="ml-auto" navbar>
                 <NavItem className="text-light">
-                    <NavLink>{props.user.name}</NavLink>
+                    <NavLink onClick={props.logOut}>Log Out {props.user.name}</NavLink>
                 </NavItem >
                 <NavItem >
                     <img src={props.user.avatar_url} />
