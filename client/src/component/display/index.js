@@ -1,39 +1,25 @@
 import React,{ Component, Fragment } from 'react';
+import {connect} from 'react-redux'
 import Fullscreen from "react-full-screen";
 import { Button } from 'reactstrap'
 import Ticker from './widgets/ticker/ticker'
 import Map from './widgets/map'
 import './display.scss'
-export default class Display extends Component{
+class Display extends Component{
 
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state={
-            widgets:[],
-            dashHeight:5,
-            dashWidth:5,
+            widgets: props.dashboard ? this.createWidgets(props.dashboard.widgets) : [],
             isFull:false
         }
-    }
-
-    componentDidMount(){
-
-        
-        fetch(`/dashboards/${this.props.match.params.id}/?token=${window.localStorage.dashToken}`)
-        .then((res) => res.json())
-        .then((res) => {
-            console.log(res)
-            this.setState({dashHeight:res.height})
-            this.setState({dashWidth:res.width})
-            this.setState({widgets:this.createWidgets(res.widgets)})
-        })
     }
 
     createWidgets=(widgets)=>{
         
         return widgets.map((widget,i)=>{
-            widget.dashHeight=this.state.dashHeight
-            widget.dashWidth=this.state.dashWidth
+            widget.dashHeight=this.props.dashboard.height
+            widget.dashWidth=this.props.dashboard.width
             switch (widget.widget_type) {
                 case "map":
                     return <Map key={i} {...widget} />
@@ -60,3 +46,6 @@ export default class Display extends Component{
         )
     }
 } 
+
+
+export default connect((state, props)=>({dashboard:state.dashboards.find(dash=>dash.id===+props.match.params.id)}))(Display)
