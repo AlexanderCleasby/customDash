@@ -1,6 +1,4 @@
 
-require 'pry'
-
 class AuthenticationController < ApplicationController
     def github
       
