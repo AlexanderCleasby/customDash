@@ -5,3 +5,4 @@
 * USE REDUX for displays
 * Introduce error handling component that accepts string of text with error and offers to navigate the user elsewhere.
 * ensure rails is configured to allow clientside routing to work.
+* it is not clear to users which items to darg.  add a prompt.
