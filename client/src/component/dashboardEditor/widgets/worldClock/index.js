@@ -32,3 +32,5 @@ export default class WorldClock extends Widget {
     }
     
 }
+
+WorldClock.defaultProps = {width:1,height:1,hideDims:true}
