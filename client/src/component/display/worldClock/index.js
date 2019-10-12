@@ -19,7 +19,7 @@ export default class WorldClock extends Component{
     render(){
         return <div style={this.widgetStyles()} className={"timeDisplay displayWidget"}>
             <Textfit mode="single">
-                <Moment tz={this.props.ops.timeZone} format={"hh:mm A"}></Moment>
+                <Moment interval={1000} tz={this.props.ops.timeZone} format={"hh:mm A"}></Moment>
             </Textfit>
             <div>
                 {this.props.ops.timeZone.split("/")[1].replace("_"," ")}
