@@ -5,13 +5,14 @@
     background-color: black;
     padding:1%;
     border: solid white 1px;
+    text-align: center;
     .name{
         height:20%;
     }
     .price{
         height:60%;
         width:100%;
-        font-size: 150%;
+        font-size: 1.5vw;
         text-align: center;
         vertical-align: middle;
         .change{

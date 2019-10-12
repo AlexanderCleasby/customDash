@@ -33,9 +33,14 @@ export default  class TickeridgetDisplay extends Component {
         width:DecimalToPercent(this.props.height/this.props.dashHeight) 
     })
 
+    QuoteStyle = ()=>({
+        width:DecimalToPercent(1/this.props.height),
+        height:DecimalToPercent(1/this.props.width)
+    })
+
     render(){
         return(<div className="ticker displayWidget" style={this.widgetStyles()}>
-            {this.state.quote.map((quote,i)=>QuoteDisplay(quote,i))}
+            {this.state.quote.map((quote,i)=><QuoteDisplay style={this.QuoteStyle()} quote={quote} key={i} />)}
         </div>)
     }
 }
