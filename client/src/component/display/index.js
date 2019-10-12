@@ -4,6 +4,7 @@ import Fullscreen from "react-full-screen";
 import { Button } from 'reactstrap'
 import Ticker from './widgets/ticker/ticker'
 import Map from './widgets/map'
+import WorldClock from './worldClock'
 import './display.scss'
 class Display extends Component{
 
@@ -25,6 +26,8 @@ class Display extends Component{
                     return <Map key={i} {...widget} />
                 case "ticker":
                     return <Ticker key={i} {...widget} />
+                case "worldClock":
+                    return <WorldClock key={i} {...widget} />
                 default:
                     return <div />
             }
