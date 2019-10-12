@@ -10,7 +10,7 @@ export default class WorldClock extends Widget {
         super(props)
         this.state={
             ...this.state,
-            timeZone:""
+            timeZone:this.selectable[0]
         }
     }
     selectable = [
@@ -19,6 +19,7 @@ export default class WorldClock extends Widget {
         "Asia/Shanghai"
     ]
     displayZone=(zone)=>zone.split('/')[1].replace("_"," ")
+    type="worldClock"
     ops=()=>({timeZone:this.state.timeZone})
     icon=faClock
     renderBody(){
