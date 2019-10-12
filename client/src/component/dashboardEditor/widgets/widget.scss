@@ -7,7 +7,7 @@
 }
 
 .widgetHeader{
-    height: 30px;
+    height: 40px;
     width: 100%;
     border-top: 2px white dotted;
     border-bottom: 2px white dotted;
@@ -23,9 +23,17 @@
     font-size: 20px;
     color:rgb(0, 0, 0);
     background-color: rgb(0, 204, 255);
-    display: inline;
+    
+    float:left;
+    width:40px;
+    height: 100%;
+    text-align: center;
 }
+
+
+
 .trash{
-    margin-left:80%;
     background: rgb(255, 52, 52);
+    float: right;
+    height: 100%;
 }

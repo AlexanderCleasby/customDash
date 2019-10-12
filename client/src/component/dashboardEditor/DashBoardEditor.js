@@ -9,6 +9,7 @@ import {updateDashboard} from '../../actions/dashboardActions'
 import uuid from 'uuid'
 import TickerWidget from './widgets/ticker'
 import MapWidget from './widgets/map'
+import WorldClockWidget from './widgets/worldClock/index'
 import Matrix from './matrix/matrix'
 import {connect} from 'react-redux'
 
@@ -50,6 +51,7 @@ class DashBoardEditor extends Component {
   }
 
   importDashboard = (dashboard)=>{
+    //name,width,height uneccessary
     this.setState((prevState) => ({
       ...prevState,
       name: dashboard.name,
@@ -59,11 +61,12 @@ class DashBoardEditor extends Component {
     }))
   }
 
-  widgetTypes=["Map","Ticker"]
+  widgetTypes=["Map","Ticker", "WorldClock"]
 
   createNewWidget=(type,widget)=>{
     if(widget){
       widget.addToPlaced=this.addToPlaced
+      //unnecessary?
       widget.placed=true
     }
     let widgetProps = {
@@ -83,6 +86,9 @@ class DashBoardEditor extends Component {
         break;
       case "ticker":
         newWidget=<TickerWidget {...widgetProps} {...widget}  />
+        break
+      case "worldclock":
+        newWidget=<WorldClockWidget {...widgetProps} {...widget} />
         break
       default:
         return false

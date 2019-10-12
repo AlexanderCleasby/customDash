@@ -59,10 +59,12 @@ export default class Widget extends Component {
             </div>
           </div>
           {this.renderBody()}
-          <div>
-            <input name="width" type="number" onChange={this.dimChange} value={this.state.width} className="sizeInput" />
-            <input name="height" type="number" onChange={this.dimChange} value={this.state.height} className="sizeInput"  />
-          </div>
+          {(()=>{if(!this.props.hideDims){
+            return (<div>
+              <input name="width" type="number" onChange={this.dimChange} value={this.state.width} className="sizeInput" />
+              <input name="height" type="number" onChange={this.dimChange} value={this.state.height} className="sizeInput"  />
+            </div>)
+        }})()}
         </div>
       );
 
