@@ -12,9 +12,18 @@ class Display extends Component{
         super(props)
         this.state={
             widgets: props.dashboard ? this.createWidgets(props.dashboard.widgets) : [],
-            isFull:false
+            isFull:false,
+            showButton:false
         }
     }
+
+    componentDidMount = ()=>document.querySelector("nav").style.display="none"
+
+    componentWillUnmount = ()=>{
+        document.querySelector("nav").style.display="flex"
+    }
+
+    timeout=false
 
     createWidgets=(widgets)=>{
         
@@ -34,15 +43,25 @@ class Display extends Component{
         })
     }
 
+    mouseMove=()=>{
+        if (!this.state.showButton && !this.state.isFull){
+            this.setState({showButton:true})
+        }
+        if (this.timeout){
+            clearTimeout(this.timeout)
+        }
+        this.timeout=setTimeout(()=>this.setState({showButton:false}),2000)
+    }
+
     render(){
         return (
-            <div className="Home">
-                <Fullscreen enabled={this.state.isFull}onChange={ isFull => this.setState({isFull})}>
-                    <div className="full-screenable-node display">
+            <div>
+                <Fullscreen enabled={this.state.isFull} onChange={ isFull => this.setState({isFull})}>
+                    <div onMouseMove={this.mouseMove} className={`full-screenable-node display controlOverlay ${this.state.showButton ? "blur": "unblur" }`}>
                         {this.state.widgets}
                     </div>
                 </Fullscreen>
-                <Button block size="lg" color="primary" className="FullScreenButton" onClick={()=>this.setState({isFull:true})} >
+                <Button block size="lg" color="primary" className={`FullScreenButton ${this.state.showButton ? "show" : "hide"}`} onClick={()=>this.setState({isFull:true})} >
                     Go Fullscreen
                 </Button>
             </div>
