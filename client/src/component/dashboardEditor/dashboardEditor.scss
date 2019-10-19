@@ -32,8 +32,11 @@
     margin: 20px 0px;
     label{
         display: block; 
+        max-width: 25%;
     }
     input{
+        max-width: 75%;
+        
         height: 30px;
         display: block;
         margin-top:auto;
