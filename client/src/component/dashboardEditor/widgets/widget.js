@@ -45,6 +45,7 @@ export default class Widget extends Component {
             <div className="logo"
                           draggable
                           onDragStart={e=>this.props.handleDragStart(e,this)}
+                          onClick={e=>this.props.handleDragStart(e,this)}
                           onDragEnd={this.props.hadnleDragEnd}
                           onDrop={this.props.placeWidget}
                           style={{backgroundColor:this.props.color}}> 
@@ -56,7 +57,7 @@ export default class Widget extends Component {
               icon={faArrowLeft}
             />
             Drag Me!
-            <div className="logo trash" onClick={()=>this.props.deleteWidget(this.props.id)}>
+            <div className="logo trash" onClick={(e)=>{this.props.deleteWidget(this.props.id);this.props.hadnleDragEnd(e);}}>
               <FontAwesomeIcon
                 icon={faTrashAlt}
               />
