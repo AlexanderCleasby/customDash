@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { Component } from 'react'
 //import moment from "moment";
-import { faClock } from '@fortawesome/free-solid-svg-icons'
+import { faClock, faMap } from '@fortawesome/free-solid-svg-icons'
 import moment from 'moment-timezone/builds/moment-timezone-with-data';
 import Widget from '../widget';
 
 
-export default class WorldClock extends Widget {
+class WorldClock extends Component {
     constructor(props){
         super(props)
         this.state={
@@ -22,7 +22,7 @@ export default class WorldClock extends Widget {
     type="worldClock"
     ops=()=>({timeZone:this.state.timeZone})
     icon=faClock
-    renderBody(){
+    render(){
         return (
             <div>
                 <select name="timeZone" onChange={this.valChange} >
@@ -35,3 +35,5 @@ export default class WorldClock extends Widget {
 }
 
 WorldClock.defaultProps = {width:1,height:1,hideDims:true}
+
+export default Widget(WorldClock,{icon:faMap})

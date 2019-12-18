@@ -1,12 +1,12 @@
-import React from 'react';
+import React, {Component} from 'react';
 import widget from './widget'
 import { faChartLine } from '@fortawesome/free-solid-svg-icons'
 
-export default class TickerWidget extends widget {
+class TickerWidget extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            ...this.state,
+            //...this.state,
             tickers: this.props.ops ? this.props.ops.tickers:[],
             TickerInput: ''
         }
@@ -22,7 +22,7 @@ export default class TickerWidget extends widget {
         return {tickers:this.state.tickers}
     }
     
-    renderBody(){
+    render(){
         return <div>
                 <label>Tickers:</label>
                 <br></br>
@@ -34,3 +34,5 @@ export default class TickerWidget extends widget {
             </div>
     }
 }
+
+export default widget(TickerWidget,{icon:faChartLine})

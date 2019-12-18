@@ -1,13 +1,12 @@
-import React from 'react';
+import React, {Component} from 'react';
 import widget from './widget'
 import { faMap } from '@fortawesome/free-solid-svg-icons'
 
 
-export default class MapWidget extends widget{
+class MapWidget extends Component{
     constructor(props){
         super(props)
         this.state={
-            ...this.state,
             lng:this.props.ops ? this.props.ops.coords.lng : '',
             lat:this.props.ops ? this.props.ops.coords.lat : '',
             zoom:this.props.ops ? this.props.ops.zoomLevel : 1
@@ -19,7 +18,7 @@ export default class MapWidget extends widget{
     ops=()=>{
         return {coords:{lng:this.state.lng,lat:this.state.lat},zoomLevel:1}
     }
-    renderBody(){
+    render(){
         return (
         <div>
             <div className="widgetControl">
@@ -33,3 +32,5 @@ export default class MapWidget extends widget{
         </div>)
     }
 }
+
+export default widget(MapWidget,{icon:faMap})
