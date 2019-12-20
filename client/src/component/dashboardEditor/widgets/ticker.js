@@ -6,8 +6,6 @@ class TickerWidget extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            //...this.state,
-            tickers: this.props.ops ? this.props.ops.tickers:[],
             TickerInput: ''
         }
     }
@@ -15,18 +13,22 @@ class TickerWidget extends Component {
 
     AddTicker=(e)=>{
         e.preventDefault()
-        this.setState(prevstate=>({...prevstate,tickers:[...this.state.tickers,this.state.TickerInput],TickerInput:''}))
+        let tickers = this.props.ops.tickers ? this.props.ops.tickers:[]
+        this.props.changeOptions({name:"tickers",value:[...tickers,this.state.TickerInput]})
+        this.setState({TickerInput:''})
     }
     type="ticker"
     ops=()=>{
         return {tickers:this.state.tickers}
     }
     
+    valChange=(e)=>this.setState({[e.target.name]:e.target.value})
+
     render(){
         return <div>
                 <label>Tickers:</label>
                 <br></br>
-                {this.state.tickers.map((ticker,i) => <div key={i}>{ticker}</div>)}
+                {(this.props.ops.tickers || []).map((ticker,i) => <div key={i}>{ticker}</div>)}
                 <form onSubmit={this.AddTicker}>
                     <input name="TickerInput" value={this.state.TickerInput} onChange={this.valChange} />
                     <input type='submit' />
