@@ -43,7 +43,6 @@ class DashBoardEditor extends Component {
   randomColor=()=>randomColor({luminosity: 'light'})
 
   pushToCloud = ()=>{
-    //debugger
     saveDashboard(this.props.match.params.id,this.state)
     .then(res=>{this.props.updateDashboard(res)
       this.props.history.push(`/display/${res.id}`)})
@@ -82,13 +81,13 @@ class DashBoardEditor extends Component {
     let newWidget
     switch (type.toLowerCase()) {
       case "map":
-        newWidget=<MapWidget {...widgetProps} {...widget}   />
+        newWidget=<MapWidget type={type.toLowerCase()} {...widgetProps} {...widget}   />
         break;
       case "ticker":
-        newWidget=<TickerWidget {...widgetProps} {...widget}  />
+        newWidget=<TickerWidget type={type.toLowerCase()} {...widgetProps} {...widget}  />
         break
       case "worldclock":
-        newWidget=<WorldClockWidget {...widgetProps} {...widget} />
+        newWidget=<WorldClockWidget type={type.toLowerCase()} {...widgetProps} {...widget} />
         break
       default:
         return false
