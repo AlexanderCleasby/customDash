@@ -14,9 +14,14 @@ export default function Widget(WrappedWidget,widgetAttributes){
         x:this.props.x||null,
         y:this.props.y||null,
         width:this.props.width||2,
-        height:this.props.height||1
-    };
+        height:this.props.height||1,
+        options:{}
+      };
     }
+
+    ops=()=>this.state.options
+
+    type=this.props.type
 
     dimChange=(e)=>{
       this.setState({[e.target.name]:parseInt(e.target.value)},this.props.forceUpdate)
@@ -27,6 +32,10 @@ export default function Widget(WrappedWidget,widgetAttributes){
         this.props.addToPlaced(this)}
     }
 
+    changeOptions=(option)=>{
+      let options = this.state.options
+      this.setState({options:{...options,[option.name]:option.value}})
+    }
 
     valChangeInt=(e)=>{
       this.setState({[e.target.name]:parseInt(e.target.value)})
@@ -64,7 +73,7 @@ export default function Widget(WrappedWidget,widgetAttributes){
                 />
               </div>
             </div>
-            <WrappedWidget {...this.props} />
+            <WrappedWidget ops={this.state.options} changeOptions={this.changeOptions} {...this.props} />
             {(()=>{if(!this.props.hideDims){
               return (<div>
                 <input name="width" type="number" onChange={this.dimChange} value={this.state.width} className="sizeInput" />
