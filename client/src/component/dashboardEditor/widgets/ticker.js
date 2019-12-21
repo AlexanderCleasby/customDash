@@ -9,7 +9,6 @@ class TickerWidget extends Component {
             TickerInput: ''
         }
     }
-    icon=faChartLine
 
     AddTicker=(e)=>{
         e.preventDefault()
@@ -17,7 +16,7 @@ class TickerWidget extends Component {
         this.props.changeOptions({tickers:[...tickers,this.state.TickerInput]})
         this.setState({TickerInput:''})
     }
-    type="ticker"
+    
     ops=()=>{
         return {tickers:this.state.tickers}
     }
