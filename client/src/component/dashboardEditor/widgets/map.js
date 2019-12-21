@@ -5,6 +5,13 @@ import { faMap } from '@fortawesome/free-solid-svg-icons'
 
 class MapWidget extends Component{
 
+    constructor(props){
+        super(props)
+        if(!props.ops.coords){
+            props.changeOptions({coords:defaultCoords})
+        }
+    }
+
     changeCoords=(e)=>{
         let coords = {...defaultCoords,...this.props.ops.coords}
         this.props.changeOptions({coords:{...coords,[e.target.name]:e.target.value}})
