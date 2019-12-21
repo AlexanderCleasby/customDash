@@ -73,7 +73,7 @@ export default function Widget(WrappedWidget,widgetAttributes){
                 />
               </div>
             </div>
-            <WrappedWidget ops={this.state.options} changeOptions={this.changeOptions} {...this.props} />
+            <WrappedWidget {...this.props} ops={this.state.options} changeOptions={this.changeOptions}  />
             {(()=>{if(!this.props.hideDims){
               return (<div>
                 <input name="width" type="number" onChange={this.dimChange} value={this.state.width} className="sizeInput" />
