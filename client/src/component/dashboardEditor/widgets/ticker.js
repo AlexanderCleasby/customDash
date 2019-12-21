@@ -14,7 +14,7 @@ class TickerWidget extends Component {
     AddTicker=(e)=>{
         e.preventDefault()
         let tickers = this.props.ops.tickers ? this.props.ops.tickers:[]
-        this.props.changeOptions({name:"tickers",value:[...tickers,this.state.TickerInput]})
+        this.props.changeOptions({tickers:[...tickers,this.state.TickerInput]})
         this.setState({TickerInput:''})
     }
     type="ticker"
