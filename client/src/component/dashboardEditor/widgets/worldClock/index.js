@@ -8,24 +8,25 @@ import Widget from '../widget';
 class WorldClock extends Component {
     constructor(props){
         super(props)
-        this.state={
-            ...this.state,
-            timeZone:this.selectable[0]
+        if(!props.ops.timeZone){
+            props.changeOptions({timeZone:this.selectable[0]})
         }
     }
+
     selectable = [
         "America/Los_Angeles",
         "America/New_York",
         "Asia/Shanghai"
     ]
+
+    changeTimeZone=(e)=>this.props.changeOptions({timeZone:e.target.value})
+    
     displayZone=(zone)=>zone.split('/')[1].replace("_"," ")
-    type="worldClock"
-    ops=()=>({timeZone:this.state.timeZone})
-    icon=faClock
+
     render(){
         return (
             <div>
-                <select name="timeZone" onChange={this.valChange} >
+                <select name="timeZone" value={this.props.ops.timeZone || this.selectable[0]} onChange={this.changeTimeZone} >
                     {this.selectable.map((zone,i)=><option key={i} value={zone}>{this.displayZone(zone)}</option>)}
                 </select>
             </div>
@@ -36,4 +37,4 @@ class WorldClock extends Component {
 
 WorldClock.defaultProps = {width:1,height:1,hideDims:true}
 
-export default Widget(WorldClock,{icon:faMap})
+export default Widget(WorldClock,{icon:faClock,hideDims:true})
