@@ -13,8 +13,8 @@ export default function Widget(WrappedWidget,widgetAttributes){
       this.state = {
         x:this.props.x||null,
         y:this.props.y||null,
-        width:this.props.width||2,
-        height:this.props.height||1,
+        width:this.props.width || widgetAttributes.width || 2,
+        height:this.props.height || widgetAttributes.height || 1,
         options:props.ops || {}
       };
     }

@@ -37,4 +37,4 @@ class WorldClock extends Component {
 
 WorldClock.defaultProps = {width:1,height:1,hideDims:true}
 
-export default Widget(WorldClock,{icon:faClock,hideDims:true})
+export default Widget(WorldClock,{icon:faClock,hideDims:true,width:1,height:1})
