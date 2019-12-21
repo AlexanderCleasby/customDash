@@ -22,6 +22,15 @@ export default  class MapWidgetDisplay extends Component  {
         zoomControl: false
     }
 
+    formatCoords = ()=>(
+        Object.keys(this.props.ops.coords).reduce(
+            (acc,key)=>{
+                acc[key] = parseFloat(this.props.ops.coords[key])
+                return acc
+            },{}
+        )
+    )
+
 
     widgetStyles = ()=>({
             position:'absolute',
@@ -38,7 +47,7 @@ export default  class MapWidgetDisplay extends Component  {
             <div className={"displayWidget"} style={this.widgetStyles()} >
                 <GoogleMapReact
                 bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_KEY }}
-                defaultCenter={this.props.ops.coords}
+                defaultCenter={this.formatCoords()}
                 defaultZoom={this.props.zoom}
                 options={this.options}
                 yesIWantToUseGoogleMapApiInternals
