@@ -30,12 +30,12 @@ class Display extends Component{
         return widgets.map((widget,i)=>{
             widget.dashHeight=this.props.dashboard.height
             widget.dashWidth=this.props.dashboard.width
-            switch (widget.widget_type) {
+            switch (widget.widget_type.toLowerCase()) {
                 case "map":
                     return <Map key={i} {...widget} />
                 case "ticker":
                     return <Ticker key={i} {...widget} />
-                case "worldClock":
+                case "worldclock":
                     return <WorldClock key={i} {...widget} />
                 default:
                     return <div />
