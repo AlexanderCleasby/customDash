@@ -34,7 +34,7 @@ export default function Widget(WrappedWidget,widgetAttributes){
 
     changeOptions=(option)=>{
       let options = this.state.options
-      this.setState({options:{...options,[option.name]:option.value}})
+      this.setState({options:{...options,...option}})
     }
 
     valChangeInt=(e)=>{
