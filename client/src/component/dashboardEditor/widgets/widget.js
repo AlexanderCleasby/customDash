@@ -15,7 +15,7 @@ export default function Widget(WrappedWidget,widgetAttributes){
         y:this.props.y||null,
         width:this.props.width||2,
         height:this.props.height||1,
-        options:{}
+        options:props.ops || {}
       };
     }
 
