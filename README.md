@@ -4,4 +4,4 @@ CustomDash is my last project for the Flatiron Software Engineering Bootcamp.  T
 
 ## Stack
 
-The project employs a React/Redux front end and a Ruby on Rails API.  Authentication is handled using jason web tokens derived from access tokens from an OAUTH provider.
+The project employs a React/Redux front end and a Ruby on Rails API.  Authentication is handled using json web tokens derived from access tokens from an OAUTH provider.
